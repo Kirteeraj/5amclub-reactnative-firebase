@@ -8,7 +8,7 @@ import {
 export function Input({style,...props}) {
 
     return (
-       <TextInput {...props} style={[style,styles.this]}/>
+       <TextInput {...props}   style={[styles.this,style]}/>
       );
 };
  

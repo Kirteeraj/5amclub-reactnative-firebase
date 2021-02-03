@@ -10,8 +10,17 @@ import { Heading } from '../components/Heading';
 import { IconButton } from '../components/IconButton';
 import { Input } from '../components/Input';
 import { TextButton } from '../components/TextButton';
+import { AuthContext } from '../context/AuthContext';
 
 export function LoginScreen({navigation}) {
+
+    const { login } = React.useContext(AuthContext);
+
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState("");
+  
 
     return (
        <View style={styles.container}>
@@ -23,9 +32,24 @@ export function LoginScreen({navigation}) {
            style={styles.input}
             placeholder={'Email'} 
             keyboardType={'email-address'}
+            value={email}
+            onChangeText={email=>setEmail(email)}
             />
-          <Input style={styles.input} placeholder={'Password'}  secureTextEntry />
-          <FilledButton style={styles.filledbutton} title="Login"/>
+          <Input style={styles.input} placeholder={'Password'} secureTextEntry 
+          value={password}
+          onChangeText={setPassword}
+          />
+          <FilledButton style={styles.filledbutton} title="Login"
+          onPress={async ()=>{
+            try{
+            setLoading(true)
+            await login(email,password);
+            } catch(e){
+            setError(e.message);
+            setLoading(false);
+            console.log(e);
+            }
+          }}/>
           <TextButton title='Join 5am club ?' style={styles.textbutton}
           onPress={()=>{
             navigation.navigate('Registration');//to learn

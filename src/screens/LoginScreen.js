@@ -9,15 +9,16 @@ import { FilledButton } from '../components/FilledButton';
 import { Heading } from '../components/Heading';
 import { IconButton } from '../components/IconButton';
 import { Input } from '../components/Input';
+import { Loading } from '../components/Loading';
 import { TextButton } from '../components/TextButton';
 import { AuthContext } from '../context/AuthContext';
 
 export function LoginScreen({navigation}) {
 
-    const { login } = React.useContext(AuthContext);
+    const { auth: { login }} = React.useContext(AuthContext);
 
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
+    const [email, setEmail] = React.useState("kirteerajmalkar@gmail.com");
+    const [password, setPassword] = React.useState("Kedar@2001");
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState("");
   
@@ -27,7 +28,7 @@ export function LoginScreen({navigation}) {
   
            <Heading style={styles.title}>5amClub</Heading>
            {/* <IconButton name={'arrow-back'}  style={styles.backicon}/> */}
-           <Error error={""}/>
+           <Error error={error}/>
           <Input
            style={styles.input}
             placeholder={'Email'} 
@@ -47,7 +48,6 @@ export function LoginScreen({navigation}) {
             } catch(e){
             setError(e.message);
             setLoading(false);
-            console.log(e);
             }
           }}/>
           <TextButton title='Join 5am club ?' style={styles.textbutton}
@@ -55,7 +55,7 @@ export function LoginScreen({navigation}) {
             navigation.navigate('Registration');//to learn
           }}
           />
-          
+          <Loading loading={loading}/>
        </View>
       );
 };

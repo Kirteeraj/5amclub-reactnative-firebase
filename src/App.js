@@ -10,7 +10,8 @@ import {AuthStackNavigator} from './navigators/AuthStackNavigator';
 import {lightTheme} from './themes/light';
 import {AuthContext} from './context/AuthContext';
 import {BASE_URL} from './config';
-import { createAction } from './util/createAction';
+import { createAction } from './utils/createAction';
+import { MainStackNavigator } from './navigators/MainStackNavigator';
 
 const FormData = require('form-data');
 const RootStack = createStackNavigator();
@@ -29,6 +30,11 @@ export default function App() {
         return {
           ...state,
           user:{...action.payload}, 
+        };
+        case 'REMOVE_USER':
+        return {
+          ...state,
+          user:undefined, 
         };
       default:
         return state;
@@ -54,8 +60,9 @@ export default function App() {
         dispatch(createAction('SET_USER',user));
       
     },
-    logout: () => {
-      console.log('logout');
+    logout: async () => {
+      await dispatch(createAction('REMOVE_USER'));
+      navig
     },
     register: async (email, password) => {
       const form = new FormData();
@@ -69,13 +76,20 @@ export default function App() {
 
   console.log(state);
   return (
-    <AuthContext.Provider value={auth}>
+    <AuthContext.Provider value={{auth:auth,user:state.user}}>
       <NavigationContainer theme={lightTheme}>
         <RootStack.Navigator
           screenOptions={{
             headerShown: false,
           }}>
-          <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
+
+            {
+              state.user?<RootStack.Screen name={'MainStack'} component={MainStackNavigator} />
+              :
+              <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
+            }
+          
+          
         </RootStack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>

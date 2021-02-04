@@ -10,7 +10,9 @@ import {TextButton} from '../components/TextButton';
 import {AuthContext} from '../context/AuthContext';
 
 export function RegistrationScreen({navigation}) {
-  const {register} = React.useContext(AuthContext);
+  const { 
+    auth: { register } 
+  } = React.useContext(AuthContext);
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");

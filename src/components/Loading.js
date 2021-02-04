@@ -7,7 +7,6 @@ import {
 } from 'react-native';
 
 export function Loading({loading,style}) {
-    console.log(loading)
     if(!loading){
         return <View/>
     }

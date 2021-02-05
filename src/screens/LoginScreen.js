@@ -15,7 +15,7 @@ import { AuthContext } from '../context/AuthContext';
 
 export function LoginScreen({navigation}) {
 
-    const { auth: { login }} = React.useContext(AuthContext);
+    const { login } = React.useContext(AuthContext);
 
     const [email, setEmail] = React.useState("kirteerajmalkar@gmail.com");
     const [password, setPassword] = React.useState("Kedar@2001");

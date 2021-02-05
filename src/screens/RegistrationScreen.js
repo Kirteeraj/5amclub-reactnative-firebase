@@ -5,19 +5,17 @@ import {FilledButton} from '../components/FilledButton';
 import {Heading} from '../components/Heading';
 import {IconButton} from '../components/IconButton';
 import {Input} from '../components/Input';
-import { Loading } from '../components/Loading';
+import {Loading} from '../components/Loading';
 import {TextButton} from '../components/TextButton';
 import {AuthContext} from '../context/AuthContext';
 
 export function RegistrationScreen({navigation}) {
-  const { 
-    auth: { register } 
-  } = React.useContext(AuthContext);
+  const {register} = React.useContext(AuthContext);
 
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState("");
+  const [error, setError] = React.useState('');
 
   return (
     <View style={styles.container}>
@@ -35,39 +33,41 @@ export function RegistrationScreen({navigation}) {
 
       <Input
         style={styles.input}
-         value = {email}
+        value={email}
         placeholder={'Email'}
         keyboardType={'email-address'}
-        onChangeText={email=>setEmail(email)}
+        onChangeText={(email) => setEmail(email)}
       />
 
-      <Input style={styles.input} placeholder={'Password'} secureTextEntry
-      value={password}
-      onChangeText={setPassword}
+      <Input
+        style={styles.input}
+        placeholder={'Password'}
+        secureTextEntry
+        value={password}
+        onChangeText={setPassword}
       />
-      
+
       <FilledButton
         style={styles.filledbutton}
         title="Register"
         onPress={async () => {
-          try{
-            setLoading(true)
-            await register(email,password);
+          try {
+            setLoading(true);
+            await register(email, password);
             navigation.pop();
-          }catch(e){
+          } catch (e) {
             setError(e.message);
             setLoading(false);
             console.log(e);
           }
         }}
       />
-    <Loading loading={loading}/>
+      <Loading loading={loading} />
     </View>
   );
 }
 
-const 
-styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',

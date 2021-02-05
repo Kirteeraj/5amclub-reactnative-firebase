@@ -2,7 +2,8 @@ import React from 'react';
 import {BASE_URL} from '../config';
 import { createAction } from '../utils/createAction';
 import axios from 'axios';
-
+import SecureStorage from 'react-native-secure-storage'
+import { sleep } from '../utils/sleep'
 
 const FormData = require('form-data');
 
@@ -26,12 +27,18 @@ export function useAuth() {
             ...state,
             user: undefined,
           };
+        case 'SET_LOADING':
+          return {
+            ...state,
+            loading: action.payload,
+          }
         default:
           return state;
       }
     },
     {
       user: undefined,
+      loading: true
     },
   );
 
@@ -51,11 +58,12 @@ export function useAuth() {
         email: data.user.email,
         token: data.jwt,
       };
+      await SecureStorage.setItem('user',JSON.stringify(user));
       dispatch(createAction('SET_USER', user));
     },
     logout: async () => {
-      await dispatch(createAction('REMOVE_USER'));
-      navig;
+      await SecureStorage.removeItem('user');
+      dispatch(createAction('REMOVE_USER'));
     },
     register: async (email, password) => {
       const form = new FormData();
@@ -65,8 +73,21 @@ export function useAuth() {
 
       await axios.post(`${BASE_URL}/auth/local/register`, form, axiosConfig);
     },
-  }));
+  }),
+  []);
 
-  console.log(state);
+  React.useEffect(()=>{
+    sleep(1500).then(()=>{
+      SecureStorage.getItem('user').then(user=>{
+        user = JSON.parse(user);
+        console.log("user",user);
+        if (user){
+          dispatch(createAction('SET_USER', user));
+        }
+        dispatch(createAction('SET_LOADING', false))
+      });
+    });
+  },[]);
+
   return {auth, state};
 }

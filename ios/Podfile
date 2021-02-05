@@ -8,6 +8,8 @@ target 'kedar5amclub' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNSecureStorage', :path => '../node_modules/react-native-secure-storage'
+
   target 'kedar5amclubTests' do
     inherit! :complete
     # Pods for testing

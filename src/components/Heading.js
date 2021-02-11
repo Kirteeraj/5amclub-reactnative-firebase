@@ -8,7 +8,7 @@ import {
 export function Heading({children,style,...props}) {
 
     return (
-       <Text {...props} style={[style,styles.text]}>
+       <Text {...props} style={[styles.text,style]}>
            {children}
        </Text>
       );

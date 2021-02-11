@@ -18,7 +18,7 @@ export function LoginScreen({navigation}) {
     const { login } = React.useContext(AuthContext);
 
     const [email, setEmail] = React.useState("kirteerajmalkar@gmail.com");
-    const [password, setPassword] = React.useState("Kedar@2001");
+    const [password, setPassword] = React.useState("Raj@2001");
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState("");
   

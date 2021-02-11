@@ -1,14 +1,15 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
-import {log} from 'react-native-reanimated';
+import {StyleSheet, View, Text, Button} from 'react-native';
 import {HeaderIconButton} from '../components/HeaderIconButton';
 import {Heading} from '../components/Heading';
 import {AuthContext} from '../context/AuthContext';
-import { UserContext } from '../context/UserContext';
+import {UserContext} from '../context/UserContext';
+
+import { useQuery, gql } from '@apollo/client';
 
 export function MainScreen({navigation}) {
   const {logout} = React.useContext(AuthContext);
-  const { user } = React.useContext(UserContext);
+  const user = React.useContext(UserContext);
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -25,14 +26,22 @@ export function MainScreen({navigation}) {
   }, [navigation, logout]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Heading>MainScreen</Heading>
-      <Text></Text>
+      <Text>{user.email}</Text>
+      <Button title={'More Info'} onPress={()=>{
+        navigation.navigate('profile');
+      }}/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   text: {
     fontWeight: 'bold',
     fontSize: 50,

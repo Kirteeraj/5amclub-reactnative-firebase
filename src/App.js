@@ -10,7 +10,7 @@ import {AuthContext} from './context/AuthContext';
 import {MainStackNavigator} from './navigators/MainStackNavigator';
 import {useAuth} from './hooks/useAuth';
 import {UserContext} from './context/UserContext';
-import { SplashScreen } from './screens/SplashScreen';
+import {SplashScreen} from './screens/SplashScreen';
 
 const RootStack = createStackNavigator();
 
@@ -18,9 +18,9 @@ export default function App() {
   const {auth, state} = useAuth();
 
   function renderScreens() {
-    console.log(state.loading)
+    console.log(state.loading);
     if (state.loading) {
-      return <RootStack.Screen name={'Splash'} component={SplashScreen}/>;
+      return <RootStack.Screen name={'Splash'} component={SplashScreen} />;
     }
 
     return state.user ? (
@@ -32,14 +32,9 @@ export default function App() {
         )}
       </RootStack.Screen>
     ) : (
-      <RootStack.Screen
-        name={'AuthStack'}
-        component={AuthStackNavigator}
-      />
-    )
+      <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
+    );
   }
-
-
 
   return (
     <AuthContext.Provider value={auth}>

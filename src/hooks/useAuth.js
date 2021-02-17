@@ -5,7 +5,6 @@ import axios from 'axios';
 import SecureStorage from 'react-native-secure-storage';
 import {sleep} from '../utils/sleep';
 
-const FormData = require('form-data');
 
 let axiosConfig = {
   headers: {

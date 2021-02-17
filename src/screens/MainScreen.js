@@ -29,8 +29,11 @@ export function MainScreen({navigation}) {
     <View style={styles.container}>
       <Heading>MainScreen</Heading>
       <Text>{user.email}</Text>
-      <Button title={'More Info'} onPress={()=>{
+      <Button style={styles.button} title={'More Info'} onPress={()=>{
         navigation.navigate('profile');
+      }}/>
+      <Button style={styles.button} title={'SetProfile'} onPress={()=>{
+        navigation.navigate('setprofile');
       }}/>
     </View>
   );
@@ -47,4 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: '#EE9608',
   },
+  button:{
+    marginTop:30,
+  }
 });

@@ -12,6 +12,7 @@ import {AuthContext} from '../context/AuthContext';
 export function RegistrationScreen({navigation}) {
   const {register} = React.useContext(AuthContext);
 
+  const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -29,6 +30,14 @@ export function RegistrationScreen({navigation}) {
         onPress={() => {
           navigation.pop();
         }}
+      />
+
+      <Input
+        style={styles.input}
+        placeholder={'Name'}
+
+        value={name}
+        onChangeText={setName}
       />
 
       <Input
@@ -80,7 +89,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   input: {
-    marginVertical: 10,
+    marginVertical: 5,
     padding: 10,
   },
   filledbutton: {

@@ -50,7 +50,7 @@ export function LoginScreen({navigation}) {
             setLoading(false);
             }
           }}/>
-          <TextButton title='Join 5am club ?' style={styles.textbutton}
+          <TextButton title='New User ? Join here' style={styles.textbutton}
           onPress={()=>{
             navigation.navigate('Registration');//to learn
           }}

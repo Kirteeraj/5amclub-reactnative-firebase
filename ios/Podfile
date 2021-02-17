@@ -10,6 +10,10 @@ target 'kedar5amclub' do
 
   pod 'RNSecureStorage', :path => '../node_modules/react-native-secure-storage'
 
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   target 'kedar5amclubTests' do
     inherit! :complete
     # Pods for testing

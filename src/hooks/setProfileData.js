@@ -18,7 +18,7 @@ export const setProfileData = async (
   intro,
   place,
   waNumber,
-  wakeupNumber,
+  wakeUpNumber,
   scrrible,
 ) => {
   var postData = new FormData();
@@ -30,7 +30,7 @@ export const setProfileData = async (
   postData.append('intro',intro);
   postData.append('place',place);
   postData.append('waNumber',waNumber);
-  postData.append('wakeupNumber',wakeupNumber);
+  postData.append('wakeUpNumber',wakeUpNumber);
   postData.append('scrrible',scrrible);
   await axios.post(`${BASE_URL}/profile/setProfile`, postData, axiosConfig);
 };

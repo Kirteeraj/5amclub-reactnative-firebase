@@ -46,7 +46,7 @@ export function LoginScreen({navigation}) {
             setLoading(true)
             await login(email,password);
             } catch(e){
-            setError(e.message);
+            setError(e.response.data);
             setLoading(false);
             }
           }}/>

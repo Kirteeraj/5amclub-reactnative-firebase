@@ -31,7 +31,7 @@ export function SetProfile({navigation}) {
   const [intro, setIntro] = React.useState(null);
   const [place, setPlace] = React.useState(null);
   const [waNumber, setWaNumber] = React.useState(null);
-  const [wakeupNumber, setWakeupNumber] = React.useState(null);
+  const [wakeUpNumber, setWakeUpNumber] = React.useState(null);
   const [scribble, setScribble] = React.useState(null);
 
   //loaging and error handling
@@ -109,8 +109,8 @@ export function SetProfile({navigation}) {
           <InputWithTitle
             title={'Wakeup Number'}
             keyboardType={'number-pad'}
-            value={wakeupNumber}
-            onChangeText={setWakeupNumber}
+            value={wakeUpNumber}
+            onChangeText={setWakeUpNumber}
           />
           <InputWithTitle
             style={{height: 70, paddingTop: 0}}
@@ -130,12 +130,12 @@ export function SetProfile({navigation}) {
                   intro,
                   place,
                   waNumber,
-                  wakeupNumber,
+                  wakeUpNumber,
                   scribble,
                 );
                 navigation.navigate('main');
               } catch (e) {
-                setError(e.message);
+                setError(e.response.data);
                 setLoading(false);
               }
             }}

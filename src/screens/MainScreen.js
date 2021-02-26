@@ -5,7 +5,6 @@ import {Heading} from '../components/Heading';
 import {AuthContext} from '../context/AuthContext';
 import {UserContext} from '../context/UserContext';
 
-import { useQuery, gql } from '@apollo/client';
 
 export function MainScreen({navigation}) {
   const {logout} = React.useContext(AuthContext);

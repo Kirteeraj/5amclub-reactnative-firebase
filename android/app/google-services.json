@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "71243808777",
+    "project_id": "amclub-cd890",
+    "storage_bucket": "amclub-cd890.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71243808777:android:7db9ffc427272f671df8d8",
+        "android_client_info": {
+          "package_name": "com.kedar5amclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71243808777-lvi2sqiij0mjtucll19olpvoop7hm6fh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kedar5amclub",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "71243808777-7j599dvej5uqir5aqhede12v79h5tegd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaG7LvdSEo2YkohD1KEP1BfL_UTzMW9gc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71243808777-7j599dvej5uqir5aqhede12v79h5tegd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

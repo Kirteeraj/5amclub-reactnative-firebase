@@ -6,12 +6,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {AuthStackNavigator} from './navigators/AuthStackNavigator';
 import {lightTheme} from './themes/light';
-import {AuthContext} from './context/AuthContext';
 import {MainStackNavigator} from './navigators/MainStackNavigator';
-import {useAuth} from './hooks/useAuth';
 import {UserContext} from './context/UserContext';
 import {SplashScreen} from './screens/SplashScreen';
-import react from 'react';
 
 const RootStack = createStackNavigator();
 

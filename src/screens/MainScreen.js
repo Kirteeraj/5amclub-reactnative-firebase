@@ -2,9 +2,8 @@ import React from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
 import {HeaderIconButton} from '../components/HeaderIconButton';
 import {Heading} from '../components/Heading';
-import {AuthContext} from '../context/AuthContext';
 import {UserContext} from '../context/UserContext';
-import {logout} from '../hooks/emailPasswordLogin';
+import {logout} from '../api/emailPasswordLogin';
 import auth from '@react-native-firebase/auth';
 
 export function MainScreen({navigation}) {

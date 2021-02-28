@@ -6,9 +6,7 @@ import {Heading} from '../components/Heading';
 import {IconButton} from '../components/IconButton';
 import {Input} from '../components/Input';
 import {Loading} from '../components/Loading';
-import {TextButton} from '../components/TextButton';
-import {AuthContext} from '../context/AuthContext';
-import {register} from '../hooks/emailPasswordLogin';
+import {register} from '../api/emailPasswordLogin';
 
 export function RegistrationScreen({navigation}) {
   // const {register} = React.useContext(AuthContext);

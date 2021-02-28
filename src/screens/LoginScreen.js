@@ -7,8 +7,7 @@ import {IconButton} from '../components/IconButton';
 import {Input} from '../components/Input';
 import {Loading} from '../components/Loading';
 import {TextButton} from '../components/TextButton';
-import {AuthContext} from '../context/AuthContext';
-import {login} from '../hooks/emailPasswordLogin';
+import {login} from '../api/emailPasswordLogin';
 import auth from '@react-native-firebase/auth';
 
 //Google SignIN

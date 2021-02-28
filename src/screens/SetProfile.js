@@ -13,7 +13,7 @@ import avatarImage from '../assets/avatar.png';
 import {IconButton} from '../components/IconButton';
 import {InputWithTitle} from '../components/InputWithTitle';
 import {FilledButton} from '../components/FilledButton';
-import {setProfileData} from '../hooks/setProfileData';
+import {setProfileData} from '../api/setProfileData';
 import {Error} from '../components/Error';
 import {Loading} from '../components/Loading';
 
@@ -86,7 +86,7 @@ export function SetProfile({navigation}) {
           />
         </View>
         <View style={{width: '100%'}}>
-          <Error error={error}></Error>
+          <Error error={error} />
           <InputWithTitle
             title={'Two words Intro'}
             placeholder={'(eg: Nature Lover)'}

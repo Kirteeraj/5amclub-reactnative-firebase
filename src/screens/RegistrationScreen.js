@@ -8,13 +8,14 @@ import {Input} from '../components/Input';
 import {Loading} from '../components/Loading';
 import {TextButton} from '../components/TextButton';
 import {AuthContext} from '../context/AuthContext';
+import {register} from '../hooks/emailPasswordLogin';
 
 export function RegistrationScreen({navigation}) {
-  const {register} = React.useContext(AuthContext);
+  // const {register} = React.useContext(AuthContext);
 
   const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [email, setEmail] = React.useState('kirteerajmalkar@gmail.com');
+  const [password, setPassword] = React.useState('kedar@2001');
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
 
@@ -35,7 +36,6 @@ export function RegistrationScreen({navigation}) {
       <Input
         style={styles.input}
         placeholder={'Name'}
-
         value={name}
         onChangeText={setName}
       />

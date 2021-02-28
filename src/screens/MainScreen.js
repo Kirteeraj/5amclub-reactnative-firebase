@@ -4,11 +4,14 @@ import {HeaderIconButton} from '../components/HeaderIconButton';
 import {Heading} from '../components/Heading';
 import {AuthContext} from '../context/AuthContext';
 import {UserContext} from '../context/UserContext';
-
+import {logout} from '../hooks/emailPasswordLogin';
+import auth from '@react-native-firebase/auth';
 
 export function MainScreen({navigation}) {
-  const {logout} = React.useContext(AuthContext);
+  // const {logout} = React.useContext(AuthContext);
   const user = React.useContext(UserContext);
+  const userData = user._user;
+  // console.log(user.email);
 
   React.useEffect(() => {
     navigation.setOptions({
@@ -27,13 +30,21 @@ export function MainScreen({navigation}) {
   return (
     <View style={styles.container}>
       <Heading>MainScreen</Heading>
-      <Text>{user.email}</Text>
-      <Button style={styles.button} title={'More Info'} onPress={()=>{
-        navigation.navigate('profile');
-      }}/>
-      <Button style={styles.button} title={'SetProfile'} onPress={()=>{
-        navigation.navigate('setprofile');
-      }}/>
+      <Text>{userData.email}</Text>
+      <Button
+        style={styles.button}
+        title={'More Info'}
+        onPress={() => {
+          navigation.navigate('profile');
+        }}
+      />
+      <Button
+        style={styles.button}
+        title={'SetProfile'}
+        onPress={() => {
+          navigation.navigate('setprofile');
+        }}
+      />
     </View>
   );
 }
@@ -49,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: '#EE9608',
   },
-  button:{
-    marginTop:30,
-  }
+  button: {
+    marginTop: 30,
+  },
 });

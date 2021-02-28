@@ -5,7 +5,6 @@ import axios from 'axios';
 import SecureStorage from 'react-native-secure-storage';
 import {sleep} from '../utils/sleep';
 
-
 let axiosConfig = {
   headers: {
     'Content-Type': 'application/json',

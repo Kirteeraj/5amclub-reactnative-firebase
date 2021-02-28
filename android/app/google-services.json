@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "71243808777-d7t0019gpg49cu2hmapgd825t7cf8qf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kedar5amclub",
+            "certificate_hash": "a6150b4aa0d043777c1e0541cd91a9dde17a035b"
+          }
+        },
+        {
           "client_id": "71243808777-lvi2sqiij0mjtucll19olpvoop7hm6fh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -37,6 +45,13 @@
             {
               "client_id": "71243808777-7j599dvej5uqir5aqhede12v79h5tegd.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "71243808777-o6ga3kd269uaa35t50a9mdt0kcvnvcj7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kedar5amclub"
+              }
             }
           ]
         }

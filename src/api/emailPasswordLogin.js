@@ -21,30 +21,17 @@ export function register(email, password) {
       if (error.code === 'auth/email-already-in-use') {
         console.log('That email address is already in use!');
       }
-
       if (error.code === 'auth/invalid-email') {
         console.log('That email address is invalid!');
       }
-
       console.error(error);
     });
 }
 
-export function login(email, password) {
-  auth()
-    .signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      // Signed in
-      var user = userCredential.user;
-      console.log(user);
-      // ...
-    })
-    .catch((error) => {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(errorMessage);
-      throw error;
-    });
+export async function login(email, password) {
+  await auth().signInWithEmailAndPassword(email, password);
+  var user = auth().currentUser;
+  console.log(user);
 }
 
 export function logout() {

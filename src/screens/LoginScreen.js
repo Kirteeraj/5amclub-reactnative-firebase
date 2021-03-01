@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Touchable, Button} from 'react-native';
 import {Error} from '../components/Error';
 import {FilledButton} from '../components/FilledButton';
 import {Heading} from '../components/Heading';
@@ -9,30 +9,9 @@ import {Loading} from '../components/Loading';
 import {TextButton} from '../components/TextButton';
 import {login} from '../api/emailPasswordLogin';
 import auth from '@react-native-firebase/auth';
-
-//Google SignIN
-import {
-  GoogleSignin,
-  GoogleSigninButton,
-} from '@react-native-community/google-signin';
-
-GoogleSignin.configure({
-  webClientId:
-    '71243808777-7j599dvej5uqir5aqhede12v79h5tegd.apps.googleusercontent.com',
-  client_type: 3,
-});
-
-async function onGoogleButtonPress() {
-  // Get the users ID token
-  const {idToken} = await GoogleSignin.signIn();
-
-  // Create a Google credential with the token
-  const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-  // Sign-in the user with the credential
-  return auth().signInWithCredential(googleCredential);
-}
-//
+import {onGoogleButtonPress} from '../api/index';
+import {GoogleSigninButton} from '@react-native-community/google-signin';
+import {LoginManager, AccessToken, LoginButton} from 'react-native-fbsdk';
 
 export function LoginScreen({navigation}) {
   // const { login } = React.useContext(AuthContext);
@@ -69,7 +48,7 @@ export function LoginScreen({navigation}) {
             setLoading(true);
             await login(email, password);
           } catch (error) {
-            setError(error.response.data);
+            setError(error.message);
             setLoading(false);
           }
         }}
@@ -92,9 +71,37 @@ export function LoginScreen({navigation}) {
             await onGoogleButtonPress();
             console.log('Google signIn success');
           } catch (error) {
+            setError(error.message);
+            setLoading(false);
             console.log(error.message);
           }
         }}
+      />
+      <LoginButton
+        onLoginFinished={(error, result) => {
+          if (error) {
+            console.log('login has error: ' + result.error);
+          } else if (result.isCancelled) {
+            console.log('login is cancelled.');
+          } else {
+            AccessToken.getCurrentAccessToken()
+              .then((data) => {
+                console.log(data.accessToken.toString());
+                // try{
+                // Create a Firebase credential with the AccessToken
+                const facebookCredential = auth.FacebookAuthProvider.credential(
+                  data.accessToken,
+                );
+                setLoading(true);
+                auth().signInWithCredential(facebookCredential);
+              })
+              .catch((error) => {
+                setLoading(false);
+                setError(error.message);
+              });
+          }
+        }}
+        onLogoutFinished={() => console.log('logout.')}
       />
       <Loading loading={loading} />
     </View>

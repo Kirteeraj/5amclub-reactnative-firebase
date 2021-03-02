@@ -12,6 +12,7 @@ import auth from '@react-native-firebase/auth';
 import {onGoogleButtonPress} from '../api/index';
 import {GoogleSigninButton} from '@react-native-community/google-signin';
 import {LoginManager, AccessToken, LoginButton} from 'react-native-fbsdk';
+import { Hr } from '../components/Hr';
 
 export function LoginScreen({navigation}) {
   // const { login } = React.useContext(AuthContext);
@@ -60,8 +61,9 @@ export function LoginScreen({navigation}) {
           navigation.navigate('Registration'); //to learn
         }}
       />
+      <Hr>OR</Hr>
       <GoogleSigninButton
-        style={{width: 380, height: 54}}
+        style={{marginTop:15}}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
         disabled={loading}
@@ -78,6 +80,7 @@ export function LoginScreen({navigation}) {
         }}
       />
       <LoginButton
+      style={{width: "82%", height:39,marginTop:15}}
         onLoginFinished={(error, result) => {
           if (error) {
             console.log('login has error: ' + result.error);
@@ -87,7 +90,6 @@ export function LoginScreen({navigation}) {
             AccessToken.getCurrentAccessToken()
               .then((data) => {
                 console.log(data.accessToken.toString());
-                // try{
                 // Create a Firebase credential with the AccessToken
                 const facebookCredential = auth.FacebookAuthProvider.credential(
                   data.accessToken,
@@ -135,4 +137,5 @@ const styles = StyleSheet.create({
     top: 20,
     left: 10,
   },
+ 
 });

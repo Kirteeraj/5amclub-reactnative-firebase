@@ -61,9 +61,10 @@ export function LoginScreen({navigation}) {
           navigation.navigate('Registration'); //to learn
         }}
       />
-      <Hr>OR</Hr>
+      <Hr 
+      style={{marginTop:20}}>OR</Hr>
       <GoogleSigninButton
-        style={{marginTop:15}}
+        style={{marginTop:25}}
         size={GoogleSigninButton.Size.Wide}
         color={GoogleSigninButton.Color.Dark}
         disabled={loading}
@@ -95,7 +96,10 @@ export function LoginScreen({navigation}) {
                   data.accessToken,
                 );
                 setLoading(true);
-                auth().signInWithCredential(facebookCredential);
+                return auth().signInWithCredential(facebookCredential);
+              })
+              .then((data)=>{
+                console.log(data);
               })
               .catch((error) => {
                 setLoading(false);

@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 
-export function Hr({children}) {
+export function Hr({children,style}) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,style]}>
       <View style={styles.line} />
       <View>
         <Text style={styles.text}>{children}</Text>

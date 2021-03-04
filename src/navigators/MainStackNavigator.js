@@ -9,6 +9,7 @@ import { MainScreen } from '../screens/MainScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { SetProfile } from '../screens/SetProfile'
 import { BASE_URL } from '../config';
+import { Onboarding } from '../screens/Onboarding';
 
 const client = new ApolloClient({
   url:`${BASE_URL}/graphql`,
@@ -30,6 +31,8 @@ export function MainStackNavigator() {
           <MainStack.Screen name={'main'} component={MainScreen} />
           <MainStack.Screen name={'profile'} component={ProfileScreen} />
           <MainStack.Screen name={'setprofile'} component={SetProfile} />
+          <MainStack.Screen name={'onboarding'} component={Onboarding} />
+
       </MainStack.Navigator>
     </ApolloProvider>
   );

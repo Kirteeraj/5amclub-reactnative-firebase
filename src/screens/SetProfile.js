@@ -19,12 +19,12 @@ import {Loading} from '../components/Loading';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
-export function SetProfile({navigation}) {
-  React.useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  }, [navigation]);
+export function SetProfile() {
+  // React.useEffect(() => {
+  //   navigation.setOptions({
+  //     headerShown: false,
+  //   });
+  // }, [navigation]);
 
   //data variables
   const [filePath, setFilePath] = React.useState({uri: avatarImageUri});

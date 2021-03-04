@@ -44,6 +44,13 @@ export function MainScreen({navigation}) {
           navigation.navigate('setprofile');
         }}
       />
+      <Button
+        style={styles.button}
+        title={'Onboarding'}
+        onPress={() => {
+          navigation.navigate('onboarding');
+        }}
+      />
     </View>
   );
 }

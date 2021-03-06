@@ -28,10 +28,11 @@ export function MainStackNavigator() {
       {
         {headerTintColor:'#EE9608'}
       }>
+         <MainStack.Screen name={'onboarding'} component={Onboarding} />
           <MainStack.Screen name={'main'} component={MainScreen} />
           <MainStack.Screen name={'profile'} component={ProfileScreen} />
           <MainStack.Screen name={'setprofile'} component={SetProfile} />
-          <MainStack.Screen name={'onboarding'} component={Onboarding} />
+         
 
       </MainStack.Navigator>
     </ApolloProvider>

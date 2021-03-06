@@ -66,7 +66,7 @@ export function Onboarding({navigation}) {
         </View>
 
         <View key="3">
-          <SetProfile></SetProfile>
+          <SetProfile navigation={navigation}/>
          
         </View>
       </ViewPager>

@@ -13,21 +13,16 @@ import avatarImage from '../assets/avatar.png';
 import {IconButton} from '../components/IconButton';
 import {InputWithTitle} from '../components/InputWithTitle';
 import {FilledButton} from '../components/FilledButton';
-import {setProfileData} from '../api/setProfileData';
 import {Error} from '../components/Error';
 import {Loading} from '../components/Loading';
+import { setProfile } from '../api/index';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
-export function SetProfile() {
-  // React.useEffect(() => {
-  //   navigation.setOptions({
-  //     headerShown: false,
-  //   });
-  // }, [navigation]);
+export function SetProfile({navigation}) {
 
-  //data variables
   const [filePath, setFilePath] = React.useState({uri: avatarImageUri});
+  const [name,setName] = React.useState(null);
   const [intro, setIntro] = React.useState(null);
   const [place, setPlace] = React.useState(null);
   const [waNumber, setWaNumber] = React.useState(null);
@@ -69,7 +64,7 @@ export function SetProfile() {
   return (
     <ScrollView>
       <View style={[styles.container]}>
-        <Heading style={styles.welcome}>Hey, Let Community know you !</Heading>
+        {/* <Heading style={styles.welcome}>Hey, Let Community know you !</Heading> */}
         <View style={{height: 160}}>
           <TouchableOpacity
             onPress={() => {
@@ -87,6 +82,11 @@ export function SetProfile() {
         </View>
         <View style={{width: '100%'}}>
           <Error error={error} />
+          <InputWithTitle
+            title={'Name'}
+            value={name}
+            onChangeText={setName}
+          />
           <InputWithTitle
             title={'Two words Intro'}
             placeholder={'(eg: Nature Lover)'}
@@ -125,7 +125,8 @@ export function SetProfile() {
             onPress={async () => {
               try {
                 setLoading(true);
-                await setProfileData(
+                await setProfile (
+                  name,
                   filePath,
                   intro,
                   place,
@@ -135,7 +136,7 @@ export function SetProfile() {
                 );
                 navigation.navigate('main');
               } catch (e) {
-                setError(e.response.data);
+                setError(e.message);
                 setLoading(false);
               }
             }}

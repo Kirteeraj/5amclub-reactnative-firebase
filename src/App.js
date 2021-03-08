@@ -27,14 +27,9 @@ export default function App() {
   // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
-    if (initializing) {
-      setInitializing(false);
-    }
-  }
-
-  React.useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     if (auth().currentUser) {
+      console.log("yo");
+      setLoading(true);
       const subscriber1 = firestore()
         .collection('users')
         .doc(auth().currentUser.uid)
@@ -42,18 +37,31 @@ export default function App() {
         .then((data) => {
           console.log(data._data);
           setUserProfile(data._data);
+          setLoading(false);
+        }).catch(()=>{
+          setLoading(false);
         });
     }
-    return subscriber; // unsubscribe on unmount
+    if (initializing) {
+      setInitializing(false);
+    }
+  }
+
+  React.useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return ()=>{
+      subscriber();
+    }; // unsubscribe on unmount
   }, [checkIfProfileExist]);
 
   function renderScreens() {
     if (initializing) {
       return <RootStack.Screen name={'Splash'} component={SplashScreen} />;
     }
-
+    if (loading) {
+      return <RootStack.Screen name={'Splash'} component={SplashScreen} />;
+    }
     if (user) {
-      // console.log(userProfile);
       if (userProfile) {
         return (
           <RootStack.Screen name={'MainStack'}>

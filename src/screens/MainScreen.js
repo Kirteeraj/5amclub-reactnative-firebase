@@ -30,7 +30,7 @@ export function MainScreen({navigation}) {
     <View style={styles.container}>
       <Heading>MainScreen</Heading>
       <Text>{userData.email}</Text>
-      <Button
+      {/* <Button
         style={styles.button}
         title={'More Info'}
         onPress={() => {
@@ -50,7 +50,7 @@ export function MainScreen({navigation}) {
         onPress={() => {
           navigation.navigate('onboarding');
         }}
-      />
+      /> */}
     </View>
   );
 }

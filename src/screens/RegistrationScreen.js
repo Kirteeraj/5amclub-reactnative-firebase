@@ -12,8 +12,8 @@ export function RegistrationScreen({navigation}) {
   // const {register} = React.useContext(AuthContext);
 
   const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('kirteerajmalkar@gmail.com');
-  const [password, setPassword] = React.useState('kedar@2001');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
 

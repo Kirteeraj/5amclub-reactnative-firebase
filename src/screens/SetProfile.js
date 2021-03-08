@@ -134,7 +134,7 @@ export function SetProfile({navigation}) {
                   wakeUpNumber,
                   scribble,
                 );
-                navigation.dangerouslyGetParent().navigate('MainStack',{screen:'main'});
+                navigation.dangerouslyGetParent().replace('MainStack',{screen:'main'});
               } catch (e) {
                 setError(e.message);
                 setLoading(false);

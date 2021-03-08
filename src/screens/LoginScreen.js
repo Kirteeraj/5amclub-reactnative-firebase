@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Touchable, Button} from 'react-native';
+import {StyleSheet, View, ScrollView, Button} from 'react-native';
 import {Error} from '../components/Error';
 import {FilledButton} from '../components/FilledButton';
 import {Heading} from '../components/Heading';
@@ -17,12 +17,13 @@ import { Hr } from '../components/Hr';
 export function LoginScreen({navigation}) {
   // const { login } = React.useContext(AuthContext);
 
-  const [email, setEmail] = React.useState('bt19cse100@iiitn.ac.in');
-  const [password, setPassword] = React.useState('kedar@2001');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Heading style={styles.title}>5amClub</Heading>
       {/* <IconButton name={'arrow-back'}  style={styles.backicon}/> */}
@@ -111,6 +112,7 @@ export function LoginScreen({navigation}) {
       />
       <Loading loading={loading} />
     </View>
+    </ScrollView>
   );
 }
 
@@ -123,8 +125,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   title: {
-    marginBottom: 30,
-    marginTop: 40,
+    marginBottom: -5,
+    marginTop: 10,
   },
   input: {
     marginVertical: 10,

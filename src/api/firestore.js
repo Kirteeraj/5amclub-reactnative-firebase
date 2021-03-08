@@ -37,6 +37,7 @@ export async function setProfile(
       user.updateProfile({
         displayName: name,
         photoURL: photoUrl,
+        isAnonymous:true
       });
       console.log(user);
     })

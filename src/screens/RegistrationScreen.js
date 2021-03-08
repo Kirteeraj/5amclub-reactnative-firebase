@@ -31,12 +31,12 @@ export function RegistrationScreen({navigation}) {
         }}
       />
 
-      <Input
+      {/* <Input
         style={styles.input}
         placeholder={'Name'}
         value={name}
         onChangeText={setName}
-      />
+      /> */}
 
       <Input
         style={styles.input}

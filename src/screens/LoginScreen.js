@@ -17,7 +17,7 @@ import { Hr } from '../components/Hr';
 export function LoginScreen({navigation}) {
   // const { login } = React.useContext(AuthContext);
 
-  const [email, setEmail] = React.useState('kirteerajmalkar@gmail.com');
+  const [email, setEmail] = React.useState('bt19cse100@iiitn.ac.in');
   const [password, setPassword] = React.useState('kedar@2001');
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
@@ -81,7 +81,7 @@ export function LoginScreen({navigation}) {
         }}
       />
       <LoginButton
-      style={{width: "82%", height:39,marginTop:15}}
+      style={{width: 303, height:39,marginTop:15}}
         onLoginFinished={(error, result) => {
           if (error) {
             console.log('login has error: ' + result.error);

@@ -5,6 +5,7 @@ import {Heading} from '../components/Heading';
 import {UserContext} from '../context/UserContext';
 import {logout} from '../api/emailPasswordLogin';
 import auth from '@react-native-firebase/auth';
+import { ProfileBox } from '../components/ProfileBox';
 
 export function MainScreen({navigation}) {
   // const {logout} = React.useContext(AuthContext);
@@ -28,8 +29,9 @@ export function MainScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Heading>MainScreen</Heading>
-      <Text>{userData.email}</Text>
+      <ProfileBox/>
+      {/* <Heading>MainScreen</Heading>
+      <Text>{userData.email}</Text> */}
       {/* <Button
         style={styles.button}
         title={'More Info'}

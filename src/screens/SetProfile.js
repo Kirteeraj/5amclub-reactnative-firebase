@@ -70,7 +70,7 @@ export function SetProfile({navigation}) {
             onPress={() => {
               launchImageLibrary(options, callBack);
             }}>
-            <AvatarImage style={styles.image} source={{uri: filePath.uri}} />
+            <AvatarImage size={140} style={styles.image} source={{uri: filePath.uri}} />
           </TouchableOpacity>
           <IconButton
             style={styles.icon}

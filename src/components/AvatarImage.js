@@ -1,9 +1,9 @@
 import React from 'react';
 import { Avatar } from 'react-native-paper';
 
-export function AvatarImage({style,onPress,source}) {
+export function AvatarImage({style,onPress,source,size}) {
   return (
-    <Avatar.Image size={140} source={source} style={style} 
+    <Avatar.Image size={size} source={source} style={style} 
     onPress={onPress}
      />
   );

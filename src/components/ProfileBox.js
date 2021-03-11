@@ -1,27 +1,47 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Image} from 'react-native';
+import Icon from 'react-native-ionicons';
 import {AvatarImage} from './AvatarImage';
-import { AwakeIndicator } from './AwakeIndicator';
+import {AwakeIndicator} from './AwakeIndicator';
+import {IconButton} from './IconButton';
+import {OutlineButton} from './OutlineButton';
+import avatarImage from '../assets/avatar.png';
+
+const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
 export function ProfileBox() {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
         <View>
-          <AvatarImage size={120} style={{marginTop: 20}} />
+          <AvatarImage
+            size={120}
+            style={{marginTop: 20}}
+            source={{
+              uri:
+                'https://firebasestorage.googleapis.com/v0/b/amclub-cd890.appspot.com/o/profilephotos%2F757sHgEM0gMBnawub0vLdeFepFk2?alt=media&token=ec823ac4-c763-40da-afc0-eb80e59cfdf0',
+            }}
+          />
         </View>
         <View
           style={{
             flexDirection: 'column',
             alignContent: 'center',
-            backgroundColor: 'grey',
           }}>
           <Text style={styles.name}>Kirteeraj Malkar</Text>
           <Text style={styles.intro}>Creative Developer</Text>
-          <AwakeIndicator/>
+          <AwakeIndicator awake={false} />
         </View>
       </View>
-      <View style={styles.footer} />
+      <View style={styles.footer}>
+        <View style={{minWidth: 120}}>
+          <OutlineButton name={'More Info'} />
+        </View>
+        <View style={{minWidth: 208, flexDirection: 'row-reverse'}}>
+          <IconButton name={'call'} color={'blue'} />
+          <IconButton name={'logo-whatsapp'} color={'#25D366'} />
+        </View>
+      </View>
     </View>
   );
 }
@@ -29,21 +49,20 @@ export function ProfileBox() {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1,
-    backgroundColor: '#E5E5E5',
+    backgroundColor: '#fafafa',
     width: '90%',
     height: 203,
-    position: 'absolute',
     borderRadius: 8,
     //shadow
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 1,
+      height: 2,
     },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
   },
   body: {
     flexDirection: 'row',
@@ -52,9 +71,13 @@ const styles = StyleSheet.create({
     height: 159,
   },
   footer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     height: 44,
     width: '100%',
     backgroundColor: 'rgba(239, 151, 151, 0.19)',
+    paddingHorizontal: 8,
   },
   name: {
     width: 208,
@@ -70,5 +93,6 @@ const styles = StyleSheet.create({
     height: 23,
     fontSize: 18,
     textAlign: 'center',
+    marginBottom: 5,
   },
 });

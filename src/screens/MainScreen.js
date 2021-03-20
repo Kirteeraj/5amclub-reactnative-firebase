@@ -5,7 +5,10 @@ import {Heading} from '../components/Heading';
 import {UserContext} from '../context/UserContext';
 import {logout} from '../api/emailPasswordLogin';
 import auth from '@react-native-firebase/auth';
-import { ProfileBox } from '../components/ProfileBox';
+import {ProfileBox} from '../components/ProfileBox';
+import {SelfProfileBox} from '../components/SelfProfileBox';
+import { StickyFooter } from '../components/StickyFooter';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export function MainScreen({navigation}) {
   // const {logout} = React.useContext(AuthContext);
@@ -28,8 +31,12 @@ export function MainScreen({navigation}) {
   }, [navigation, logout]);
 
   return (
+    <>
+    <ScrollView>
     <View style={styles.container}>
-      <ProfileBox/>
+      <SelfProfileBox/>
+      <ProfileBox />
+      <ProfileBox />
       {/* <Heading>MainScreen</Heading>
       <Text>{userData.email}</Text> */}
       {/* <Button
@@ -54,6 +61,9 @@ export function MainScreen({navigation}) {
         }}
       /> */}
     </View>
+    </ScrollView>
+    <StickyFooter />
+    </>
   );
 }
 
@@ -61,7 +71,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    minHeight:700
   },
   text: {
     fontWeight: 'bold',

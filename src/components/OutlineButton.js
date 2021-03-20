@@ -3,9 +3,9 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
 export function OutlineButton({name,onpress,style}) {
   return (
-      <TouchableOpacity onPress={onpress}>
+    <TouchableOpacity onPress={onpress}>
     <View style={[styles.container,style]}>
-     <Text style={styles.text}>{name}</Text>
+     <Text style={[styles.text]}>{name}</Text>
     </View>
     </TouchableOpacity>
   );

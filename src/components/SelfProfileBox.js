@@ -9,37 +9,41 @@ import avatarImage from '../assets/avatar.png';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
-export function ProfileBox() {
+export function SelfProfileBox() {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
-        <View>
+        <View
+          style={{
+            minWidth: 208,
+            flexDirection: 'column',
+            alignContent: 'center',
+          }}>
+          <Text style={styles.name}>Camp: April 21</Text>
+          <Text style={styles.intro}>Facilitator: Pranav patil</Text>
+        </View>
+        <View
+          style={{
+            minWidth: 125,
+            alignItems: 'center',
+          }}>
           <AvatarImage
-            size={120}
-            style={{marginTop: 20}}
+            size={67}
+            style={{marginTop: 5}}
             source={{
               uri:
                 'https://firebasestorage.googleapis.com/v0/b/amclub-cd890.appspot.com/o/profilephotos%2F757sHgEM0gMBnawub0vLdeFepFk2?alt=media&token=ec823ac4-c763-40da-afc0-eb80e59cfdf0',
             }}
           />
         </View>
-        <View
-          style={{
-            flexDirection: 'column',
-            alignContent: 'center',
-          }}>
-          <Text style={styles.name}>Kirteeraj Malkar</Text>
-          <Text style={styles.intro}>Creative Developer</Text>
-          <AwakeIndicator awake={false} />
-        </View>
       </View>
       <View style={styles.footer}>
-        <View style={{minWidth: 120}}>
-          <OutlineButton name={'More Info'} />
-        </View>
-        <View style={{minWidth: 208, flexDirection: 'row-reverse'}}>
-          <IconButton name={'call'} color={'blue'} />
+        <View style={{minWidth: 208, flexDirection: 'row'}}>
           <IconButton name={'logo-whatsapp'} color={'#25D366'} />
+          <IconButton name={'call'} color={'blue'} />
+        </View>
+        <View style={{minWidth: 120}}>
+          <OutlineButton name={'I am awake'} style={{backgroundColor:'#E4CF5F'}} />
         </View>
       </View>
     </View>
@@ -48,11 +52,12 @@ export function ProfileBox() {
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
+    marginTop: 21,
     display: 'flex',
-    marginTop:18,
     backgroundColor: '#fafafa',
     width: '90%',
-    height: 203,
+    height: 124,
     borderRadius: 8,
     //shadow
     shadowColor: '#000',
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    height: 159,
+    height: 80,
   },
   footer: {
     flexDirection: 'row',
@@ -82,18 +87,19 @@ const styles = StyleSheet.create({
   },
   name: {
     width: 208,
-    height: 29,
-    marginTop: 18,
-    fontSize: 25,
-    textAlign: 'center',
+    height: 21,
+    marginTop: 13,
+    fontSize: 18,
+    textAlign: 'left',
     fontFamily: 'Roboto',
-    lineHeight: 29,
+    fontWeight: '700',
   },
   intro: {
     width: 211,
     height: 23,
+    fontWeight: '700',
     fontSize: 18,
-    textAlign: 'center',
-    marginBottom: 5,
+    textAlign: 'left',
+    marginTop: 2,
   },
 });

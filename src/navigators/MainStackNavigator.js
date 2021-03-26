@@ -3,8 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {MainScreen} from '../screens/MainScreen';
 import {ProfileScreen} from '../screens/ProfileScreen';
 import {SetProfile} from '../screens/SetProfile';
-import {BASE_URL} from '../config';
-import {Onboarding} from '../screens/Onboarding';
+import { SubgroupScreen } from '../screens/SubgroupScreen';
+import { CampaignsScreen } from '../screens/CampaignsScreen';
 
 const MainStack = createStackNavigator();
 
@@ -14,6 +14,8 @@ export function MainStackNavigator() {
       <MainStack.Screen name={'main'} component={MainScreen} />
       <MainStack.Screen name={'profile'} component={ProfileScreen} />
       <MainStack.Screen name={'setprofile'} component={SetProfile} />
+      <MainStack.Screen name={'subgroupscreen'} component={SubgroupScreen} />
+      <MainStack.Screen name={'campaignscreen'} component={CampaignsScreen} />
     </MainStack.Navigator>
   );
 }

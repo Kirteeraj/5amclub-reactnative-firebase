@@ -3,7 +3,6 @@ import {StyleSheet, View, ScrollView, Button} from 'react-native';
 import {Error} from '../components/Error';
 import {FilledButton} from '../components/FilledButton';
 import {Heading} from '../components/Heading';
-import {IconButton} from '../components/IconButton';
 import {Input} from '../components/Input';
 import {Loading} from '../components/Loading';
 import {TextButton} from '../components/TextButton';
@@ -11,7 +10,7 @@ import {login} from '../api/emailPasswordLogin';
 import auth from '@react-native-firebase/auth';
 import {onGoogleButtonPress} from '../api/index';
 import {GoogleSigninButton} from '@react-native-community/google-signin';
-import {LoginManager, AccessToken, LoginButton} from 'react-native-fbsdk';
+import {AccessToken, LoginButton} from 'react-native-fbsdk';
 import { Hr } from '../components/Hr';
 
 export function LoginScreen({navigation}) {

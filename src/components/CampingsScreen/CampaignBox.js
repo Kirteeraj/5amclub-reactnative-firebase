@@ -1,10 +1,13 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-ionicons';
-import {OpenUrlButton} from '../OpenUrlButton';
+import {OutlineButton} from '../OutlineButton';
+import {razorpayPay} from '../../api/index';
+import {Loading} from '../../components/Loading';
 
 export function CampaignBox({campData}) {
   var data = {
+    id: campData.id.id,
     name: campData.name,
     date: campData.date,
     time: campData.time,
@@ -16,6 +19,7 @@ export function CampaignBox({campData}) {
     paymentLink: campData.paymentLink,
   };
   const [info, setInfo] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   var toogleData = info
     ? {
         display: {display: 'flex'},
@@ -73,9 +77,22 @@ export function CampaignBox({campData}) {
           </TouchableOpacity>
         </View>
         <View style={{minWidth: 208, flexDirection: 'row-reverse'}}>
-          <OpenUrlButton name="Join Now" url={data.paymentLink} />
+          <OutlineButton
+            name={'Join Now'}
+            onpress={async () => {
+              try {
+                setLoading(true);
+                await razorpayPay(data);
+              } catch (err) {
+                alert(`We are having so trouble: ${err}`);
+              } finally {
+                setLoading(false);
+              }
+            }}
+          />
         </View>
       </View>
+      <Loading loading={loading} />
     </View>
   );
 }

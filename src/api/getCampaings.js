@@ -1,11 +1,10 @@
 import firestore from '@react-native-firebase/firestore';
-import {FirebaseStorageTypes} from '@react-native-firebase/storage';
 
 export async function getCampaings() {
-  const data= await firestore()
+  const data = await firestore()
     .collection('campaigns')
     .get()
-    .then(data=>{
+    .then((data) => {
       console.log(data);
     })
     .catch((err) => {
@@ -13,6 +12,6 @@ export async function getCampaings() {
       return 'error';
     });
 
-    console.log(data);
-    return data;
+  console.log(data);
+  return data;
 }

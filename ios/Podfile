@@ -16,6 +16,8 @@ target 'kedar5amclub' do
 
   pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
 
+  pod 'react-native-razorpay', :path => '../node_modules/react-native-razorpay'
+
   target 'kedar5amclubTests' do
     inherit! :complete
     # Pods for testing

@@ -198,6 +198,8 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-android-sdk:[4,5)'//fbsdk
 
+    implementation project(':react-native-razorpay')
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
       exclude group:'com.facebook.fbjni'
     }

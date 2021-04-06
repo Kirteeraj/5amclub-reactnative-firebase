@@ -10,11 +10,10 @@ export var fetchCollection = (collection) => {
         .collection(collection)
         .get()
         .then((querySnapshot) => {
-          querySnapshot.docs
-            .map((doc) => {
-              setData(d=>[...d, doc.data()]);
-            });
-        })
+          querySnapshot.docs.map((doc) => {
+            setData((d) => [...d, doc.data()]);
+          });
+        });
     }
     fetchData();
   }, [collection]);

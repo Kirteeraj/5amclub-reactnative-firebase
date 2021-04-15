@@ -18,9 +18,14 @@ export function SelfProfileBox() {
             minWidth: 208,
             flexDirection: 'column',
             alignContent: 'center',
+            marginLeft: 14,
           }}>
-          <Text style={styles.name}>Camp: April 21</Text>
-          <Text style={styles.intro}>Facilitator: Pranav patil</Text>
+          <Text allowFontScaling={false} style={styles.name}>
+            Camp: April 21
+          </Text>
+          <Text allowFontScaling={false} style={styles.intro}>
+            Facilitator: Pranav patil
+          </Text>
         </View>
         <View
           style={{
@@ -43,7 +48,10 @@ export function SelfProfileBox() {
           <IconButton name={'call'} color={'blue'} />
         </View>
         <View style={{minWidth: 120}}>
-          <OutlineButton name={'I am awake'} style={{backgroundColor:'#E4CF5F'}} />
+          <OutlineButton
+            name={'I am awake'}
+            style={{backgroundColor: '#E4CF5F'}}
+          />
         </View>
       </View>
     </View>
@@ -84,6 +92,8 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'rgba(239, 151, 151, 0.19)',
     paddingHorizontal: 8,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
   name: {
     width: 208,

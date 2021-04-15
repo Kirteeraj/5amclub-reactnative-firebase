@@ -1,21 +1,65 @@
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MainScreen} from '../screens/MainScreen';
 import {ProfileScreen} from '../screens/ProfileScreen';
 import {SetProfile} from '../screens/SetProfile';
-import { SubgroupScreen } from '../screens/SubgroupScreen';
-import { CampaignsScreen } from '../screens/CampaignsScreen';
+import {SubgroupScreen} from '../screens/SubgroupScreen';
+import {CampaignsScreen} from '../screens/CampaignsScreen';
+import Icon from 'react-native-ionicons';
+import {SettingsScreen} from '../screens/SettingsScreen';
 
-const MainStack = createStackNavigator();
+const MainStack = createBottomTabNavigator();
 
 export function MainStackNavigator() {
   return (
-    <MainStack.Navigator screenOptions={{headerTintColor: '#EE9608'}}>
-      <MainStack.Screen name={'main'} component={MainScreen} />
-      <MainStack.Screen name={'profile'} component={ProfileScreen} />
-      <MainStack.Screen name={'setprofile'} component={SetProfile} />
-      <MainStack.Screen name={'subgroupscreen'} component={SubgroupScreen} />
-      <MainStack.Screen name={'campaignscreen'} component={CampaignsScreen} />
+    <MainStack.Navigator
+      initialRouteName={'campaignscreen'}
+      tabBarOptions={{
+        activeTintColor: '#EE9608',
+        showLabel: false,
+      }}
+      backBehavior={'initialRoute'}>
+      <MainStack.Screen
+        name={'main'}
+        component={MainScreen}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      {/* <MainStack.Screen name={'profile'} component={ProfileScreen} /> */}
+      <MainStack.Screen
+        name={'subgroupscreen'}
+        component={SubgroupScreen}
+        options={{
+          tabBarLabel: 'Subgroup',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="people" color={color} size={size} />
+          ),
+        }}
+      />
+      <MainStack.Screen
+        name={'campaignscreen'}
+        component={CampaignsScreen}
+        options={{
+          tabBarLabel: 'Campaigns',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="flag" color={color} size={size} />
+          ),
+        }}
+      />
+      <MainStack.Screen
+        name={'settings'}
+        component={SettingsScreen}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="settings" color={color} size={size} />
+          ),
+        }}
+      />
     </MainStack.Navigator>
   );
 }

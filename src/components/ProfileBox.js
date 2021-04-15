@@ -1,21 +1,21 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
-import Icon from 'react-native-ionicons';
+import {StyleSheet, View, Text, Image, Dimensions} from 'react-native';
 import {AvatarImage} from './AvatarImage';
 import {AwakeIndicator} from './AwakeIndicator';
 import {IconButton} from './IconButton';
 import {OutlineButton} from './OutlineButton';
 import avatarImage from '../assets/avatar.png';
 
+const {width} = Dimensions.get('window');
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
 export function ProfileBox() {
   return (
     <View style={styles.container}>
       <View style={styles.body}>
-        <View>
+        <View style={{marginLeft: 4}}>
           <AvatarImage
-            size={120}
+            size={width * 0.32}
             style={{marginTop: 20}}
             source={{
               uri:
@@ -28,8 +28,12 @@ export function ProfileBox() {
             flexDirection: 'column',
             alignContent: 'center',
           }}>
-          <Text style={styles.name}>Kirteeraj Malkar</Text>
-          <Text style={styles.intro}>Creative Developer</Text>
+          <Text allowFontScaling={false} style={styles.name}>
+            Kirteeraj Malkar
+          </Text>
+          <Text allowFontScaling={false} style={styles.intro}>
+            Creative Developer
+          </Text>
           <AwakeIndicator awake={false} />
         </View>
       </View>
@@ -49,7 +53,7 @@ export function ProfileBox() {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    marginTop:18,
+    marginTop: 18,
     backgroundColor: '#fafafa',
     width: '90%',
     height: 203,
@@ -70,6 +74,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     width: '100%',
     height: 159,
+    paddingHorizontal: 7,
   },
   footer: {
     flexDirection: 'row',
@@ -78,7 +83,9 @@ const styles = StyleSheet.create({
     height: 44,
     width: '100%',
     backgroundColor: 'rgba(239, 151, 151, 0.19)',
-    paddingHorizontal: 8,
+    paddingHorizontal: 7,
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
   },
   name: {
     width: 208,

@@ -4,15 +4,16 @@ import {StyleSheet, View, Text} from 'react-native';
 export function Error({error}) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}> {error} </Text>
+      <Text allowFontScaling={false} style={styles.text}>
+        {' '}
+        {error}{' '}
+      </Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-    },
+  container: {},
   text: {
     fontWeight: 'bold',
     fontSize: 17,

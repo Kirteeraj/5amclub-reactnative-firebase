@@ -46,20 +46,33 @@ export function CampaignBox({campData}) {
         <View
           style={{
             flexDirection: 'column',
-            width: 'auto',
+            width: '60%',
+            alignContent: 'center',
           }}>
-          <Text style={styles.name}>{data.name}</Text>
-          <Text style={styles.date}>{data.date}</Text>
-          <Text style={styles.time}>{data.time}</Text>
-          <Text style={styles.notes}>{data.notes}</Text>
+          <Text allowFontScaling={false} style={styles.name}>
+            {data.name}
+          </Text>
+          <Text allowFontScaling={false} style={styles.date}>
+            {data.date}
+          </Text>
+          <Text allowFontScaling={false} style={styles.time}>
+            {data.time}
+          </Text>
+          <Text allowFontScaling={false} style={styles.notes}>
+            {data.notes}
+          </Text>
         </View>
       </View>
       <View style={toogleData.display}>
-        <Text style={styles.details}>{data.details}</Text>
-        <Text style={styles.facilitator}>
+        <Text allowFontScaling={false} style={styles.details}>
+          {data.details}
+        </Text>
+        <Text allowFontScaling={false} style={styles.facilitator}>
           Facilitator: {data.facilitatorName}
         </Text>
-        <Text style={styles.facilitator}>Fees: Rs.{data.fees}/-</Text>
+        <Text allowFontScaling={false} style={styles.facilitator}>
+          Fees: Rs.{data.fees}/-
+        </Text>
       </View>
       <View style={styles.footer}>
         <View style={{minWidth: 120}}>
@@ -73,10 +86,13 @@ export function CampaignBox({campData}) {
               }
             }}>
             <Icon name={toogleData.icon} />
-            <Text style={{fontSize: 19}}> {toogleData.text}</Text>
+            <Text allowFontScaling={false} style={{fontSize: 19}}>
+              {' '}
+              {toogleData.text}
+            </Text>
           </TouchableOpacity>
         </View>
-        <View style={{minWidth: 208, flexDirection: 'row-reverse'}}>
+        <View style={{minWidth: 180, flexDirection: 'row-reverse'}}>
           <OutlineButton
             name={'Join Now'}
             onpress={async () => {
@@ -84,7 +100,7 @@ export function CampaignBox({campData}) {
                 setLoading(true);
                 await razorpayPay(data);
               } catch (err) {
-                alert(`We are having so trouble: ${err}`);
+                alert(`We are having some trouble: ${err}`);
               } finally {
                 setLoading(false);
               }
@@ -132,7 +148,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
   },
   name: {
-    width: 208,
+    width: 200,
     height: 35,
     marginTop: 6,
     fontSize: 22,
@@ -155,13 +171,13 @@ const styles = StyleSheet.create({
     marginTop: -6,
   },
   notes: {
-    width: 208,
+    width: '100%',
     flexWrap: 'wrap',
     alignSelf: 'flex-end',
-    marginBottom: 10,
+    marginBottom: 0,
     marginTop: 'auto',
     textAlign: 'right',
-    paddingHorizontal: 18,
+    paddingHorizontal: 10,
     fontSize: 12.5,
     fontWeight: '700',
     color: '#FF8686',

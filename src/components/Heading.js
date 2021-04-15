@@ -3,7 +3,7 @@ import {StyleSheet, View, Text} from 'react-native';
 
 export function Heading({children, style, ...props}) {
   return (
-    <Text {...props} style={[styles.text, style]}>
+    <Text allowFontScaling={false} {...props} style={[styles.text, style]}>
       {children}
     </Text>
   );

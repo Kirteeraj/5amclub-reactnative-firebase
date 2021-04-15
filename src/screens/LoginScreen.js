@@ -11,7 +11,7 @@ import auth from '@react-native-firebase/auth';
 import {onGoogleButtonPress} from '../api/index';
 import {GoogleSigninButton} from '@react-native-community/google-signin';
 import {AccessToken, LoginButton} from 'react-native-fbsdk';
-import { Hr } from '../components/Hr';
+import {Hr} from '../components/Hr';
 
 export function LoginScreen({navigation}) {
   // const { login } = React.useContext(AuthContext);
@@ -23,94 +23,93 @@ export function LoginScreen({navigation}) {
 
   return (
     <ScrollView>
-    <View style={styles.container}>
-      <Heading style={styles.title}>5amClub</Heading>
-      {/* <IconButton name={'arrow-back'}  style={styles.backicon}/> */}
-      <Error error={error} />
-      <Input
-        style={styles.input}
-        placeholder={'Email'}
-        keyboardType={'email-address'}
-        value={email}
-        onChangeText={(email) => setEmail(email)}
-      />
-      <Input
-        style={styles.input}
-        placeholder={'Password'}
-        secureTextEntry
-        value={password}
-        onChangeText={setPassword}
-      />
-      <FilledButton
-        style={styles.filledbutton}
-        title="Login"
-        onPress={async () => {
-          try {
-            setLoading(true);
-            await login(email, password);
-          } catch (error) {
-            setError(error.message);
-            setLoading(false);
-          }
-        }}
-      />
-      <TextButton
-        title="New User ? Join here"
-        style={styles.textbutton}
-        onPress={() => {
-          navigation.navigate('Registration'); //to learn
-        }}
-      />
-      <Hr 
-      style={{marginTop:20}}>OR</Hr>
-      <GoogleSigninButton
-        style={{marginTop:25}}
-        size={GoogleSigninButton.Size.Wide}
-        color={GoogleSigninButton.Color.Dark}
-        disabled={loading}
-        onPress={async () => {
-          try {
-            setLoading(true);
-            await onGoogleButtonPress();
-            console.log('Google signIn success');
-          } catch (error) {
-            setError(error.message);
-            setLoading(false);
-            console.log(error.message);
-          }
-        }}
-      />
-      <LoginButton
-      style={{width: 303, height:39,marginTop:15}}
-        onLoginFinished={(error, result) => {
-          if (error) {
-            console.log('login has error: ' + result.error);
-          } else if (result.isCancelled) {
-            console.log('login is cancelled.');
-          } else {
-            AccessToken.getCurrentAccessToken()
-              .then((data) => {
-                console.log(data.accessToken.toString());
-                // Create a Firebase credential with the AccessToken
-                const facebookCredential = auth.FacebookAuthProvider.credential(
-                  data.accessToken,
-                );
-                setLoading(true);
-                return auth().signInWithCredential(facebookCredential);
-              })
-              .then((data)=>{
-                console.log(data);
-              })
-              .catch((error) => {
-                setLoading(false);
-                setError(error.message);
-              });
-          }
-        }}
-        onLogoutFinished={() => console.log('logout.')}
-      />
-      <Loading loading={loading} />
-    </View>
+      <View style={styles.container}>
+        <Heading style={styles.title}>5amClub</Heading>
+        {/* <IconButton name={'arrow-back'}  style={styles.backicon}/> */}
+        <Error error={error} />
+        <Input
+          style={styles.input}
+          placeholder={'Email'}
+          keyboardType={'email-address'}
+          value={email}
+          onChangeText={(email) => setEmail(email)}
+        />
+        <Input
+          style={styles.input}
+          placeholder={'Password'}
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+        <FilledButton
+          style={styles.filledbutton}
+          title="Login"
+          onPress={async () => {
+            try {
+              setLoading(true);
+              await login(email, password);
+            } catch (error) {
+              setError(error.message);
+              setLoading(false);
+            }
+          }}
+        />
+        <TextButton
+          title="New User ? Join here"
+          style={styles.textbutton}
+          onPress={() => {
+            navigation.navigate('Registration'); //to learn
+          }}
+        />
+        <Hr style={{marginTop: 20}}>OR</Hr>
+        <GoogleSigninButton
+          style={{marginTop: 25}}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          disabled={loading}
+          onPress={async () => {
+            try {
+              setLoading(true);
+              await onGoogleButtonPress();
+              console.log('Google signIn success');
+            } catch (error) {
+              setError(error.message);
+              setLoading(false);
+              console.log(error.message);
+            }
+          }}
+        />
+        <LoginButton
+          style={{width: 303, height: 39, marginTop: 15}}
+          onLoginFinished={(error, result) => {
+            if (error) {
+              console.log('login has error: ' + result.error);
+            } else if (result.isCancelled) {
+              console.log('login is cancelled.');
+            } else {
+              AccessToken.getCurrentAccessToken()
+                .then((data) => {
+                  console.log(data.accessToken.toString());
+                  // Create a Firebase credential with the AccessToken
+                  const facebookCredential = auth.FacebookAuthProvider.credential(
+                    data.accessToken,
+                  );
+                  setLoading(true);
+                  return auth().signInWithCredential(facebookCredential);
+                })
+                .then((data) => {
+                  console.log(data);
+                })
+                .catch((error) => {
+                  setLoading(false);
+                  setError(error.message);
+                });
+            }
+          }}
+          onLogoutFinished={() => console.log('logout.')}
+        />
+        <Loading loading={loading} />
+      </View>
     </ScrollView>
   );
 }
@@ -142,5 +141,4 @@ const styles = StyleSheet.create({
     top: 20,
     left: 10,
   },
- 
 });

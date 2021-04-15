@@ -5,9 +5,15 @@ export function InputWithTitle({title, style, ...props}) {
   return (
     <View style={styles.container}>
       <View style={styles.div}>
-        <Text style={styles.title}>{title}</Text>
+        <Text allowFontScaling={false} style={styles.title}>
+          {title}
+        </Text>
       </View>
-      <TextInput {...props} style={[styles.this, style]} />
+      <TextInput
+        allowFontScaling={false}
+        {...props}
+        style={[styles.this, style]}
+      />
     </View>
   );
 }
@@ -21,18 +27,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   div: {
-      width:'100%',
-      textAlign:'left',
-      marginBottom:0,
+    width: '100%',
+    textAlign: 'left',
+    marginBottom: 0,
   },
   title: {
-      marginLeft:3,
-      fontSize: 17,
-      fontWeight:'bold',
-      color:'#EE9608'
+    marginLeft: 3,
+    fontSize: 17,
+    fontWeight: 'bold',
+    color: '#EE9608',
   },
-  container:{
-        width:'100%',
-        marginVertical:2
-  }
+  container: {
+    width: '100%',
+    marginVertical: 2,
+  },
 });

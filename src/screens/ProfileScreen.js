@@ -1,30 +1,25 @@
 import React from 'react';
-import {
-    StyleSheet,
-    View,
-    Text,
-} from 'react-native'
+import {StyleSheet, View, Text} from 'react-native';
 
-export function ProfileScreen({navigation}){
+export function ProfileScreen({navigation}) {
+  React.useEffect(() => {
+    navigation.setOptions({
+      title: 'nameVar',
+      color: '#EE9608',
+    });
+  }, [navigation]);
 
-    React.useEffect(() => {
-        navigation.setOptions({
-          title: 'nameVar',
-          color:'#EE9608',
-        });
-      }, [navigation]);
-
-    return (
-        <View style={styles.container}>
-            <Text>Welcome to profile Scrreen</Text>
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Text>Welcome to profile Scrreen</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        alignItems:'center',
-        justifyContent: 'center',
-    }
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

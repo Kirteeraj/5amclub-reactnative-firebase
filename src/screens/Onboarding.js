@@ -1,10 +1,12 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import {View, Image, Text, Dimensions} from 'react-native';
 import ViewPager from '@react-native-community/viewpager';
 
 import Page from '../components/Page';
 import {OnboardingFooter} from '../components/OnboardingFooter';
-import { SetProfile } from './SetProfile';
+import {SetProfile} from './SetProfile';
+
+const {width} = Dimensions.get('screen');
 
 export function Onboarding({navigation}) {
   React.useEffect(() => {
@@ -35,7 +37,7 @@ export function Onboarding({navigation}) {
             }}
           />
         </View>
-        
+
         <View key="2">
           <View
             style={{
@@ -45,10 +47,16 @@ export function Onboarding({navigation}) {
               backgroundColor: 'white',
             }}>
             <Image
-              style={{width: 453, height: 300, resizeMode: 'stretch'}}
+              style={{
+                width: width,
+                height: width * 0.75,
+                resizeMode: 'stretch',
+              }}
               source={require('../assets/profile.png')}
             />
-            <Text style={{fontSize: 24, fontWeight: 'bold', color: '#EE9608'}}>
+            <Text
+              allowFontScaling={false}
+              style={{fontSize: 24, fontWeight: 'bold', color: '#EE9608'}}>
               Lets make a profile !
             </Text>
           </View>
@@ -66,8 +74,7 @@ export function Onboarding({navigation}) {
         </View>
 
         <View key="3">
-          <SetProfile navigation={navigation}/>
-         
+          <SetProfile navigation={navigation} />
         </View>
       </ViewPager>
     </View>

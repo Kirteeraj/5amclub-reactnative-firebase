@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
     width: '100%',
     marginVertical: 10,
     borderRadius: 7,
-    fontSize: 18,
+    fontSize: 15,
   },
 });

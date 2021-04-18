@@ -3,9 +3,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {
-  createStackNavigator,
-} from '@react-navigation/stack';
+import {createStackNavigator} from '@react-navigation/stack';
 
 import {AuthStackNavigator} from './navigators/AuthStackNavigator';
 import {lightTheme} from './themes/light';
@@ -14,6 +12,7 @@ import {UserContext} from './context/UserContext';
 import {SplashScreen} from './screens/SplashScreen';
 import {checkIfProfileExist} from './utils/checkIfProfileExist';
 import {OnboardingStackNavigator} from './navigators/OnboardingStackNavigator';
+import {StatusBar} from 'react-native';
 
 const RootStack = createStackNavigator();
 
@@ -28,7 +27,7 @@ export default function App() {
   function onAuthStateChanged(user) {
     setUser(user);
     if (auth().currentUser) {
-      console.log("yo");
+      console.log('yo');
       setLoading(true);
       const subscriber1 = firestore()
         .collection('users')
@@ -38,7 +37,8 @@ export default function App() {
           console.log(data._data);
           setUserProfile(data._data);
           setLoading(false);
-        }).catch(()=>{
+        })
+        .catch(() => {
           setLoading(false);
         });
     }
@@ -49,7 +49,7 @@ export default function App() {
 
   React.useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-    return ()=>{
+    return () => {
       subscriber();
     }; // unsubscribe on unmount
   }, [checkIfProfileExist]);
@@ -96,13 +96,15 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer theme={lightTheme}>
-      <RootStack.Navigator
-        screenOptions={{
-          headerShown: false,
-        }}>
-        {renderScreens()}
-      </RootStack.Navigator>
-    </NavigationContainer>
+    <>
+      <NavigationContainer theme={lightTheme}>
+        <RootStack.Navigator
+          screenOptions={{
+            headerShown: false,
+          }}>
+          {renderScreens()}
+        </RootStack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }

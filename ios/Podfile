@@ -20,6 +20,8 @@ target 'kedar5amclub' do
 
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+  pod 'RNSound', :path => '../node_modules/react-native-sound'
+
   target 'kedar5amclubTests' do
     inherit! :complete
     # Pods for testing

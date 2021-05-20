@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Button} from 'react-native';
-import {ProfileBox} from '../components/ProfileBox';
-import {SelfProfileBox} from '../components/SelfProfileBox';
+import {ProfileBox} from '../components/SubgroupScreen/ProfileBox';
+import {SelfProfileBox} from '../components/SubgroupScreen/SelfProfileBox';
 import {ScrollView} from 'react-native-gesture-handler';
 
 export function SubgroupScreen({navigation}) {

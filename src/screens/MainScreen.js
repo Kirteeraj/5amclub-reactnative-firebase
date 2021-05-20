@@ -7,19 +7,40 @@ import {
   Image,
   StatusBar,
   ScrollView,
+  Button,
 } from 'react-native';
-import {HeaderIconButton} from '../components/HeaderIconButton';
-import {Heading} from '../components/Heading';
 import {UserContext} from '../context/UserContext';
-import auth from '@react-native-firebase/auth';
 import {ImageFooter} from '../components/ImageFooter';
-import LinearGradient from 'react-native-linear-gradient';
-import {shadow} from 'react-native-paper';
 import {PinMessage} from '../components/PinMessage';
+import Sound from 'react-native-sound';
+import music from '../assets/music.mp3';
 
 const windowHeight = Dimensions.get('window').height;
 
+const backgroundSound = new Sound(music, Sound.MAIN_BUNDLE, (error) => {
+  if (error) {
+    console.log('failed to load the sound', error);
+    return;
+  }
+});
+
 export function MainScreen({navigation}) {
+  const [isMute, setIsMute] = React.useState(false);
+
+  React.useEffect(() => {
+    try {
+      console.log('Start');
+      backgroundSound.setNumberOfLoops(-1);
+      backgroundSound.play();
+    } catch (err) {
+      console.log('sound', err);
+    }
+    return function stopSound() {
+      console.log('Stop');
+      backgroundSound.pause();
+    };
+  }, []);
+
   const data = {
     link:
       'https://firebasestorage.googleapis.com/v0/b/amclub-cd890.appspot.com/o/homeScreenPhotos%2Fwelcome-screeen.jpg?alt=media&token=ac838d69-a7de-4d96-b4be-68b5716f4d26',
@@ -30,24 +51,8 @@ export function MainScreen({navigation}) {
     factor: 0.82,
   };
 
-  // const {logout} = React.useContext(AuthContext);
   const user = React.useContext(UserContext);
   const userData = user._user;
-  // console.log(user.email);
-
-  // React.useEffect(() => {
-  //   navigation.setOptions({
-  //     headerRight: () => (
-  //       <HeaderIconButton
-  //         name={'log-out'}
-  //         onPress={async () => {
-  //           logout();
-  //         }}
-  //       />
-  //     ),
-  //     title: '',
-  //   });
-  // }, [navigation, logout]);
 
   return (
     <View style={{flex: 1}}>
@@ -58,6 +63,24 @@ export function MainScreen({navigation}) {
           <Text style={{color: data.color}}>{data.qoute}</Text>
           <Text style={{color: data.color}}>{data.author}</Text>
         </View>
+        <View
+          style={{position: 'absolute', top: windowHeight * 0.535, right: 15}}>
+          <Button
+            title={isMute ? 'unmute' : 'mute'}
+            color={'rgba(52, 52, 52, 0.8)'}
+            onPress={() => {
+              if (isMute) {
+                console.log('playing', isMute);
+                setIsMute(false);
+                backgroundSound.play((success) => {});
+              } else {
+                console.log('pausing', isMute);
+                setIsMute(true);
+                backgroundSound.pause((success) => {});
+              }
+            }}
+          />
+        </View>
         <ImageFooter />
         <PinMessage />
         <PinMessage />
@@ -65,6 +88,21 @@ export function MainScreen({navigation}) {
         <PinMessage />
         <PinMessage />
         <PinMessage />
+
+        <Button
+          title="play Sound"
+          onPress={() => {
+            backgroundSound.setNumberOfLoops(-1);
+            backgroundSound.play();
+          }}
+        />
+        <Button
+          title="pause"
+          onPress={() => {
+            backgroundSound.setNumberOfLoops(-1);
+            backgroundSound.pause();
+          }}
+        />
       </ScrollView>
     </View>
   );

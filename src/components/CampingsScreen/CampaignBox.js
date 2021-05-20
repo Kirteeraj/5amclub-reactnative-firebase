@@ -4,6 +4,7 @@ import Icon from 'react-native-ionicons';
 import {OutlineButton} from '../OutlineButton';
 import {razorpayPay} from '../../api/index';
 import {Loading} from '../../components/Loading';
+import useExpandable from '../../hooks/useExpandable';
 
 export function CampaignBox({campData}) {
   var data = {
@@ -18,19 +19,8 @@ export function CampaignBox({campData}) {
     imageLink: campData.imageLink,
     paymentLink: campData.paymentLink,
   };
-  const [info, setInfo] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  var toogleData = info
-    ? {
-        display: {display: 'flex'},
-        icon: 'arrow-dropup',
-        text: 'Less Info',
-      }
-    : {
-        display: {display: 'none'},
-        icon: 'arrow-dropdown',
-        text: 'More Info',
-      };
+  const {toogle, toogleData} = useExpandable();
 
   return (
     <View style={styles.container}>
@@ -63,7 +53,7 @@ export function CampaignBox({campData}) {
           </Text>
         </View>
       </View>
-      <View style={toogleData.display}>
+      <View style={toogleData.displayStyle}>
         <Text allowFontScaling={false} style={styles.details}>
           {data.details}
         </Text>
@@ -78,13 +68,7 @@ export function CampaignBox({campData}) {
         <View style={{minWidth: 120}}>
           <TouchableOpacity
             style={{flexDirection: 'row', alignItems: 'center'}}
-            onPress={() => {
-              if (info) {
-                setInfo(false);
-              } else {
-                setInfo(true);
-              }
-            }}>
+            onPress={toogle}>
             <Icon name={toogleData.icon} />
             <Text allowFontScaling={false} style={{fontSize: 19}}>
               {' '}

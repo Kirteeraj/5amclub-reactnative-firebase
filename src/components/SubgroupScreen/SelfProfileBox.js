@@ -1,15 +1,29 @@
 import React from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Text, Image, Linking} from 'react-native';
 import Icon from 'react-native-ionicons';
-import {AvatarImage} from './AvatarImage';
-import {AwakeIndicator} from './AwakeIndicator';
-import {IconButton} from './IconButton';
-import {OutlineButton} from './OutlineButton';
-import avatarImage from '../assets/avatar.png';
+import {AvatarImage} from '../AvatarImage';
+import {AwakeIndicator} from '../AwakeIndicator';
+import {IconButton} from '../IconButton';
+import {OutlineButton} from '../OutlineButton';
+import avatarImage from '../../assets/avatar.png';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
 export function SelfProfileBox() {
+  const data = {
+    name: 'Kirteeraj Malkar',
+    intro: 'Creative Developer',
+    imageUri:
+      'https://firebasestorage.googleapis.com/v0/b/amclub-cd890.appspot.com/o/profilephotos%2F757sHgEM0gMBnawub0vLdeFepFk2?alt=media&token=ec823ac4-c763-40da-afc0-eb80e59cfdf0',
+    scrribleSpace:
+      'I m more interested always in improving myself in one thing in they key areas -physical fitness, relationship and my finance.. my hobbies is gyming and reading book . I don’t have any issues in my life .. apart if I create one .. I suggest every person should select one field to improve in week .. they can bring massive change over a time .. thank you',
+    contribution:
+      'Improve or concentrate on one thing that you want to improve in key areas of physical fitness , relationship and finance ..',
+    place: 'Kolhapur, Maharashtra',
+    whatsappNo: '919405550489',
+    wakeUpNo: '919405550489',
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.body}>
@@ -44,8 +58,31 @@ export function SelfProfileBox() {
       </View>
       <View style={styles.footer}>
         <View style={{minWidth: 208, flexDirection: 'row'}}>
-          <IconButton name={'logo-whatsapp'} color={'#25D366'} />
-          <IconButton name={'call'} color={'blue'} />
+          <IconButton
+            name={'call'}
+            color={'blue'}
+            onPress={() => {
+              Linking.openURL(`tel:${data.wakeUpNo}`).catch((error) => {
+                console.log(error);
+                alert(
+                  `Unable To Open DialPad\n Name: ${data.name} \nNo: ${data.whatsappNo}`,
+                );
+              });
+            }}
+          />
+          <IconButton
+            name={'logo-whatsapp'}
+            color={'#25D366'}
+            onPress={() => {
+              Linking.openURL(
+                `whatsapp://send?text=Hi+5aimer&phone=${data.whatsappNo}`,
+              ).catch(() => {
+                alert(
+                  `Unable To Open WhatsApp \nName: ${data.name} \nWhatsApp No: ${data.whatsappNo}`,
+                );
+              });
+            }}
+          />
         </View>
         <View style={{minWidth: 120}}>
           <OutlineButton

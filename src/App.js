@@ -89,8 +89,12 @@ export default function App() {
         );
       }
     } else {
+    console.log('Inside this');
+
       return (
-        <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator} />
+        <RootStack.Screen name={'AuthStack'}>
+          {() => <AuthStackNavigator />}
+        </RootStack.Screen>
       );
     }
   }

@@ -88,21 +88,6 @@ export function MainScreen({navigation}) {
         <PinMessage />
         <PinMessage />
         <PinMessage />
-
-        <Button
-          title="play Sound"
-          onPress={() => {
-            backgroundSound.setNumberOfLoops(-1);
-            backgroundSound.play();
-          }}
-        />
-        <Button
-          title="pause"
-          onPress={() => {
-            backgroundSound.setNumberOfLoops(-1);
-            backgroundSound.pause();
-          }}
-        />
       </ScrollView>
     </View>
   );

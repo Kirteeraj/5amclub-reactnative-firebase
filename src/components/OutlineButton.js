@@ -1,11 +1,13 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
-export function OutlineButton({name, onpress, style}) {
+export function OutlineButton({name, onpress, style, color = 'black'}) {
   return (
     <TouchableOpacity onPress={onpress}>
-      <View allowFontScaling={false} style={[styles.container, style]}>
-        <Text allowFontScaling={false} style={[styles.text]}>
+      <View
+        allowFontScaling={false}
+        style={[styles.container, style, {borderColor: color}]}>
+        <Text allowFontScaling={false} style={[styles.text, {color: color}]}>
           {name}
         </Text>
       </View>

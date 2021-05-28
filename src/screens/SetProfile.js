@@ -15,19 +15,20 @@ import {InputWithTitle} from '../components/InputWithTitle';
 import {FilledButton} from '../components/FilledButton';
 import {Error} from '../components/Error';
 import {Loading} from '../components/Loading';
-import { setProfile } from '../api/index';
+import {setProfile} from '../api/index';
+import {validatePhNumber} from '../utils/validatePhNumber';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
 export function SetProfile({navigation}) {
-
   const [filePath, setFilePath] = React.useState({uri: avatarImageUri});
-  const [name,setName] = React.useState(null);
+  const [name, setName] = React.useState(null);
   const [intro, setIntro] = React.useState(null);
   const [place, setPlace] = React.useState(null);
   const [waNumber, setWaNumber] = React.useState(null);
   const [wakeUpNumber, setWakeUpNumber] = React.useState(null);
   const [scribble, setScribble] = React.useState(null);
+  const contribution = React.useRef(null);
 
   //loaging and error handling
   const [loading, setLoading] = React.useState(false);
@@ -70,7 +71,11 @@ export function SetProfile({navigation}) {
             onPress={() => {
               launchImageLibrary(options, callBack);
             }}>
-            <AvatarImage size={140} style={styles.image} source={{uri: filePath.uri}} />
+            <AvatarImage
+              size={140}
+              style={styles.image}
+              source={{uri: filePath.uri}}
+            />
           </TouchableOpacity>
           <IconButton
             style={styles.icon}
@@ -85,17 +90,20 @@ export function SetProfile({navigation}) {
           <InputWithTitle
             title={'Name'}
             value={name}
+            autoCompleteType="name"
             onChangeText={setName}
           />
           <InputWithTitle
             title={'Two words Intro'}
             placeholder={'(eg: Nature Lover)'}
             value={intro}
+            maxLength={24}
             onChangeText={setIntro}
           />
           <InputWithTitle
             title={'Your place'}
             placeholder={'(eg: Parvati, Pune)'}
+            maxLength={28}
             value={place}
             onChangeText={setPlace}
           />
@@ -104,20 +112,55 @@ export function SetProfile({navigation}) {
             placeholder={''}
             keyboardType={'number-pad'}
             value={waNumber}
-            onChangeText={setWaNumber}
+            maxLength={10}
+            dataDetectorTypes="phoneNumber"
+            autoCompleteType="tel"
+            onChangeText={(e) => {
+              setWaNumber(e);
+              if (validatePhNumber(e)) {
+                setError(null);
+                console.log('Valid');
+              } else {
+                setError('Phone number must contain all 10 digits');
+                console.log('Not a Valid');
+              }
+            }}
           />
           <InputWithTitle
             title={'Wakeup Number'}
             keyboardType={'number-pad'}
             value={wakeUpNumber}
-            onChangeText={setWakeUpNumber}
+            maxLength={10}
+            autoCompleteType="tel"
+            onChangeText={(e) => {
+              setWakeUpNumber(e);
+              if (validatePhNumber(e)) {
+                setError(null);
+                console.log('Valid');
+              } else {
+                setError('Phone number must contain all 10 digits');
+                console.log('Not a Valid');
+              }
+            }}
           />
           <InputWithTitle
-            style={{height: 70, paddingTop: 0}}
+            style={{height: 90, paddingTop: 0}}
             title={'Scrrible space'}
             placeholder={'You can write anything here'}
             value={scribble}
+            multiline
             onChangeText={setScribble}
+          />
+          <InputWithTitle
+            ref={contribution}
+            style={{height: 90, paddingTop: 0}}
+            title={'Contribution'}
+            placeholder={'What can you contribute'}
+            multiline
+            onChangeText={() => {
+              console.log(contribution);
+              console.log(contribution?.current?.value);
+            }}
           />
           <FilledButton
             style={{marginTop: 6}}
@@ -125,7 +168,7 @@ export function SetProfile({navigation}) {
             onPress={async () => {
               try {
                 setLoading(true);
-                await setProfile (
+                await setProfile(
                   name,
                   filePath,
                   intro,
@@ -134,7 +177,9 @@ export function SetProfile({navigation}) {
                   wakeUpNumber,
                   scribble,
                 );
-                navigation.dangerouslyGetParent().replace('MainStack',{screen:'main'});
+                navigation
+                  .dangerouslyGetParent()
+                  .replace('MainStack', {screen: 'main'});
               } catch (e) {
                 setError(e.message);
                 setLoading(false);

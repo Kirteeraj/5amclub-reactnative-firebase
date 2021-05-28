@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, View, TextInput, Text} from 'react-native';
 
-export function InputWithTitle({title, style, ...props}) {
+var InputWithTitle = React.forwardRef(function ({title, style, ...props}, ref) {
+  var innerRef = React.useRef(ref);
   return (
     <View style={styles.container}>
       <View style={styles.div}>
@@ -10,13 +11,16 @@ export function InputWithTitle({title, style, ...props}) {
         </Text>
       </View>
       <TextInput
+        ref={innerRef}
         allowFontScaling={false}
         {...props}
         style={[styles.this, style]}
       />
     </View>
   );
-}
+});
+
+export {InputWithTitle};
 
 const styles = StyleSheet.create({
   this: {

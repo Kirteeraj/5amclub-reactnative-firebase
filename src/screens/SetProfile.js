@@ -17,6 +17,7 @@ import {Error} from '../components/Error';
 import {Loading} from '../components/Loading';
 import {setProfile} from '../api/index';
 import {validatePhNumber} from '../utils/validatePhNumber';
+import {useScrollToTop} from '@react-navigation/native';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
@@ -33,6 +34,9 @@ export function SetProfile({navigation}) {
   //loaging and error handling
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
+
+  //ref for Error
+  const scrollViewRef = React.useRef();
 
   //config forlaunchImage Libarary
   var options = {
@@ -63,7 +67,7 @@ export function SetProfile({navigation}) {
   };
 
   return (
-    <ScrollView>
+    <ScrollView ref={scrollViewRef}>
       <View style={[styles.container]}>
         {/* <Heading style={styles.welcome}>Hey, Let Community know you !</Heading> */}
         <View style={{height: 160}}>
@@ -180,6 +184,10 @@ export function SetProfile({navigation}) {
                   .replace('MainStack', {screen: 'main'});
               } catch (e) {
                 setError(e.message);
+                scrollViewRef.current?.scrollTo({
+                  y: 0,
+                  animated: true,
+                });
                 setLoading(false);
               }
             }}

@@ -10,6 +10,7 @@ export async function setProfile(
   waNumber,
   wakeUpNumber,
   scrrible,
+  cotributaion,
 ) {
   var userId = await auth().currentUser.uid;
   console.log(filePath);
@@ -27,7 +28,8 @@ export async function setProfile(
       waNumber,
       wakeUpNumber,
       scrrible,
-      photoUrl
+      cotributaion,
+      photoUrl,
     })
     // .then((data)=>console.log(data))
     .then(() => {
@@ -37,7 +39,7 @@ export async function setProfile(
       user.updateProfile({
         displayName: name,
         photoURL: photoUrl,
-        isAnonymous:true
+        isAnonymous: true,
       });
       console.log(user);
     })

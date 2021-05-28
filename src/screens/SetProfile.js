@@ -28,7 +28,7 @@ export function SetProfile({navigation}) {
   const [waNumber, setWaNumber] = React.useState(null);
   const [wakeUpNumber, setWakeUpNumber] = React.useState(null);
   const [scribble, setScribble] = React.useState(null);
-  const contribution = React.useRef(null);
+  const [contribution, setContribution] = React.useState(null);
 
   //loaging and error handling
   const [loading, setLoading] = React.useState(false);
@@ -145,22 +145,19 @@ export function SetProfile({navigation}) {
           />
           <InputWithTitle
             style={{height: 90, paddingTop: 0}}
+            title={'Contribution'}
+            value={contribution}
+            placeholder={'What can you contribute'}
+            multiline
+            onChangeText={setContribution}
+          />
+          <InputWithTitle
+            style={{height: 90, paddingTop: 0}}
             title={'Scrrible space'}
             placeholder={'You can write anything here'}
             value={scribble}
             multiline
             onChangeText={setScribble}
-          />
-          <InputWithTitle
-            ref={contribution}
-            style={{height: 90, paddingTop: 0}}
-            title={'Contribution'}
-            placeholder={'What can you contribute'}
-            multiline
-            onChangeText={() => {
-              console.log(contribution);
-              console.log(contribution?.current?.value);
-            }}
           />
           <FilledButton
             style={{marginTop: 6}}
@@ -176,6 +173,7 @@ export function SetProfile({navigation}) {
                   waNumber,
                   wakeUpNumber,
                   scribble,
+                  contribution,
                 );
                 navigation
                   .dangerouslyGetParent()

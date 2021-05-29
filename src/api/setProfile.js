@@ -10,25 +10,23 @@ export async function setProfile(
   waNumber,
   wakeUpNumber,
   scrrible,
-  cotributaion,
+  contribution,
 ) {
   if (
-    name ||
-    filePath ||
-    intro ||
-    place ||
-    waNumber ||
-    wakeUpNumber ||
-    scrrible ||
-    cotributaion === null
+    name == null ||
+    filePath == null ||
+    intro == null ||
+    place == null ||
+    waNumber == null ||
+    wakeUpNumber == null ||
+    scrrible == null ||
+    contribution == null
   ) {
     throw new Error('All Feilds are required');
   } else {
     var userId = await auth().currentUser.uid;
-    console.log(filePath);
     var photoUrl = await uploadProfilePhoto(userId, filePath.uri);
     //var userId = '387484jlij3l4';
-    console.log('photoUrl', photoUrl);
     await firestore()
       .collection('users')
       .doc(userId)
@@ -40,12 +38,12 @@ export async function setProfile(
         waNumber,
         wakeUpNumber,
         scrrible,
-        cotributaion,
+        contribution,
         photoUrl,
       })
       // .then((data)=>console.log(data))
       .then(() => {
-        console.log('UserProfile Created!');
+        //console.log('UserProfile Created!');
         //Update User Name and Image
         var user = auth().currentUser;
         user.updateProfile({
@@ -53,7 +51,7 @@ export async function setProfile(
           photoURL: photoUrl,
           isAnonymous: true,
         });
-        console.log(user);
+        //  console.log(user);
       })
       .catch((error) => {
         console.log(error);

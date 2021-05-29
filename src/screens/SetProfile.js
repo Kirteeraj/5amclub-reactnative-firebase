@@ -123,10 +123,10 @@ export function SetProfile({navigation}) {
               setWaNumber(e);
               if (validatePhNumber(e)) {
                 setError(null);
-                console.log('Valid');
+                // console.log('Valid');
               } else {
                 setError('Phone number must contain all 10 digits');
-                console.log('Not a Valid');
+                // console.log('Not a Valid');
               }
             }}
           />
@@ -140,10 +140,10 @@ export function SetProfile({navigation}) {
               setWakeUpNumber(e);
               if (validatePhNumber(e)) {
                 setError(null);
-                console.log('Valid');
+                //console.log('Valid');
               } else {
                 setError('Phone number must contain all 10 digits');
-                console.log('Not a Valid');
+                //console.log('Not a Valid');
               }
             }}
           />

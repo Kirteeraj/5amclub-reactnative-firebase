@@ -5,10 +5,14 @@ import {lightTheme} from '../themes/light';
 import {OutlineButton} from '../components/OutlineButton';
 import {AvatarImage} from '../components/AvatarImage';
 import avatarImage from '../assets/avatar.png';
+import {UserContext} from '../context/UserContext';
+import {SetProfile} from './SetProfile';
 
 const {colors} = lightTheme;
 
-export function SettingsScreen() {
+export function SettingsScreen({navigation}) {
+  const {userProfile} = React.useContext(UserContext);
+
   const data = {
     name: 'Kirteeraj Malkar',
     intro: 'Creative Developer',
@@ -44,6 +48,11 @@ export function SettingsScreen() {
           name={'Edit profile'}
           style={styles.button}
           color={colors.orange}
+          onpress={() => {
+            navigation
+              .dangerouslyGetParent()
+              .push('SubStack', {screen: 'editprofile'});
+          }}
         />
         <OutlineButton
           name={'Contact Us'}

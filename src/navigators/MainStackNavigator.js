@@ -1,8 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MainScreen} from '../screens/MainScreen';
-import {ProfileScreen} from '../screens/ProfileScreen';
-import {SetProfile} from '../screens/SetProfile';
 import {SubgroupScreen} from '../screens/SubgroupScreen';
 import {CampaignsScreen} from '../screens/CampaignsScreen';
 import Icon from 'react-native-ionicons';
@@ -60,6 +58,10 @@ export function MainStackNavigator() {
           ),
         }}
       />
+      {/* Note : Other Scrrens which we dont want in
+      Bottome tab Bar, are declared in SubStackNavigator and
+      can  be aceesed using dangeroslygetparent (.push or .pop) 
+      method of navigation object*/}
     </MainStack.Navigator>
   );
 }

@@ -21,7 +21,7 @@ import {UserContext} from '../context/UserContext';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
-export function SetProfile({navigation}) {
+export function EditProfile({navigation}) {
   const {userProfile} = React.useContext(UserContext);
 
   //form states

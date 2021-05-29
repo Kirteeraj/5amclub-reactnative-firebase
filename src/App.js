@@ -13,6 +13,7 @@ import {SplashScreen} from './screens/SplashScreen';
 import {checkIfProfileExist} from './utils/checkIfProfileExist';
 import {OnboardingStackNavigator} from './navigators/OnboardingStackNavigator';
 import {StatusBar} from 'react-native';
+import {SubStackNavigator} from './navigators/SubStackNavigator';
 
 const RootStack = createStackNavigator();
 
@@ -64,13 +65,22 @@ export default function App() {
     if (user) {
       if (userProfile) {
         return (
-          <RootStack.Screen name={'MainStack'}>
-            {() => (
-              <UserContext.Provider value={user}>
-                <MainStackNavigator />
-              </UserContext.Provider>
-            )}
-          </RootStack.Screen>
+          <>
+            <RootStack.Screen name={'MainStack'}>
+              {() => (
+                <UserContext.Provider value={{user, userProfile}}>
+                  <MainStackNavigator />
+                </UserContext.Provider>
+              )}
+            </RootStack.Screen>
+            <RootStack.Screen name={'SubStack'}>
+              {() => (
+                <UserContext.Provider value={{user, userProfile}}>
+                  <SubStackNavigator />
+                </UserContext.Provider>
+              )}
+            </RootStack.Screen>
+          </>
         );
       } else {
         return (
@@ -80,7 +90,7 @@ export default function App() {
             </RootStack.Screen>
             <RootStack.Screen name={'MainStack'}>
               {() => (
-                <UserContext.Provider value={user}>
+                <UserContext.Provider value={{user, userProfile}}>
                   <MainStackNavigator />
                 </UserContext.Provider>
               )}
@@ -89,8 +99,7 @@ export default function App() {
         );
       }
     } else {
-    console.log('Inside this');
-
+      console.log('Inside this');
       return (
         <RootStack.Screen name={'AuthStack'}>
           {() => <AuthStackNavigator />}

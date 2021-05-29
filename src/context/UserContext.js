@@ -1,5 +1,5 @@
-import { createContext } from 'react';
+import {createContext} from 'react';
 
+var UserContext = createContext();
 
-
-export const UserContext = createContext();
+export {UserContext};

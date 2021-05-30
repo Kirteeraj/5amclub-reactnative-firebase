@@ -1,5 +1,11 @@
 import React from 'react';
-import {View, useWindowDimensions, Text, StyleSheet} from 'react-native';
+import {
+  View,
+  useWindowDimensions,
+  Text,
+  StyleSheet,
+  Linking,
+} from 'react-native';
 import {OutlineButton} from './OutlineButton';
 import {RoundedButton} from './RoundedButton';
 
@@ -23,7 +29,13 @@ export function ImageFooter({backgroundColor}) {
         </Text>
       </View>
       <View style={{height: 67, flexDirection: 'column-reverse'}}>
-        <OutlineButton name={'Join Meet'} style={{}} />
+        <OutlineButton
+          name={'Join Meet'}
+          style={{}}
+          onpress={() => {
+            Linking.openURL('https://meet.google.com/vwp-msss-nxm');
+          }}
+        />
       </View>
     </View>
   );

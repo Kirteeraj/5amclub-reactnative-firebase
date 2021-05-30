@@ -68,14 +68,16 @@ export default function App() {
           <>
             <RootStack.Screen name={'MainStack'}>
               {() => (
-                <UserContext.Provider value={{user, userProfile}}>
+                <UserContext.Provider
+                  value={{user, userProfile, setUserProfile}}>
                   <MainStackNavigator />
                 </UserContext.Provider>
               )}
             </RootStack.Screen>
             <RootStack.Screen name={'SubStack'}>
               {() => (
-                <UserContext.Provider value={{user, userProfile}}>
+                <UserContext.Provider
+                  value={{user, userProfile, setUserProfile}}>
                   <SubStackNavigator />
                 </UserContext.Provider>
               )}

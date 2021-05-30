@@ -18,7 +18,8 @@ import {validatePhNumber} from '../utils/validatePhNumber';
 import {UserContext} from '../context/UserContext';
 import {Success} from '../components/Success';
 import {editProfile} from '../api/editProfile';
-import {getProfile} from '../api';
+import auth from '@react-native-firebase/auth';
+import {getProfile} from '../api/getProfile';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 var isPhotoNew = false;

@@ -14,9 +14,9 @@ export function SettingsScreen({navigation}) {
   const {userProfile} = React.useContext(UserContext);
 
   const data = {
-    name: 'Kirteeraj Malkar',
-    intro: 'Creative Developer',
-    uri: Image.resolveAssetSource(avatarImage).uri,
+    name: userProfile.name,
+    intro: userProfile.intro,
+    uri: userProfile.photoUrl,
   };
 
   return (

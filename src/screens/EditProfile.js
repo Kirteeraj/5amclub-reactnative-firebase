@@ -6,7 +6,6 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import {Heading} from '../components/Heading';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {AvatarImage} from '../components/AvatarImage';
 import avatarImage from '../assets/avatar.png';
@@ -15,14 +14,18 @@ import {InputWithTitle} from '../components/InputWithTitle';
 import {FilledButton} from '../components/FilledButton';
 import {Error} from '../components/Error';
 import {Loading} from '../components/Loading';
-import {setProfile} from '../api/index';
 import {validatePhNumber} from '../utils/validatePhNumber';
 import {UserContext} from '../context/UserContext';
+import {Success} from '../components/Success';
+import {editProfile} from '../api/editProfile';
+import auth from '@react-native-firebase/auth';
+import {getProfile} from '../api';
 
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
+var isPhotoNew = false;
 
 export function EditProfile({navigation}) {
-  const {userProfile} = React.useContext(UserContext);
+  const {userProfile, setUserProfile} = React.useContext(UserContext);
 
   //form states
   const [filePath, setFilePath] = React.useState({uri: avatarImageUri});
@@ -35,13 +38,23 @@ export function EditProfile({navigation}) {
   const [contribution, setContribution] = React.useState(null);
 
   //if user is passes that means we are in edit mode
-  if (userProfile) {
-    console.log(userProfile);
-  }
+  React.useEffect(() => {
+    if (userProfile) {
+      setName(userProfile.name);
+      setIntro(userProfile.intro);
+      setPlace(userProfile.place);
+      setWaNumber(userProfile.waNumber);
+      setWakeUpNumber(userProfile.waNumber);
+      setScribble(userProfile.scrrible);
+      setContribution(userProfile.contribution);
+      setFilePath({uri: userProfile.photoUrl});
+    }
+  }, [userProfile]);
 
   //loaging and error handling
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState('');
+  const [success, setSuccess] = React.useState('');
 
   //ref for Error
   const scrollViewRef = React.useRef();
@@ -71,6 +84,7 @@ export function EditProfile({navigation}) {
       alert(response.customButton);
     } else {
       setFilePath(response);
+      isPhotoNew = true;
     }
   };
 
@@ -99,11 +113,13 @@ export function EditProfile({navigation}) {
         </View>
         <View style={{width: '100%'}}>
           <Error error={error} />
+          <Success success={success} />
           <InputWithTitle
             title={'Name'}
             value={name}
             autoCompleteType="name"
             onChangeText={setName}
+            editable={false}
           />
           <InputWithTitle
             title={'Two words Intro'}
@@ -177,7 +193,7 @@ export function EditProfile({navigation}) {
             onPress={async () => {
               try {
                 setLoading(true);
-                await setProfile(
+                await editProfile(
                   name,
                   filePath,
                   intro,
@@ -186,17 +202,25 @@ export function EditProfile({navigation}) {
                   wakeUpNumber,
                   scribble,
                   contribution,
+                  isPhotoNew,
                 );
-                navigation
-                  .dangerouslyGetParent()
-                  .replace('MainStack', {screen: 'main'});
+                setSuccess('Profile Updated');
+                var newUserProfile = await getProfile();
+                setUserProfile(newUserProfile);
+                console.log('newUserProfile', newUserProfile);
+                if (isPhotoNew) {
+                  // await Image.resolveAssetSource(filePath.uri);
+                  console.log('using stuff');
+                }
               } catch (e) {
+                console.log(error);
                 setError(e.message);
+              } finally {
+                setLoading(false);
                 scrollViewRef.current?.scrollTo({
                   y: 0,
                   animated: true,
                 });
-                setLoading(false);
               }
             }}
           />

@@ -9,7 +9,7 @@ import {
 import {OutlineButton} from './OutlineButton';
 import {RoundedButton} from './RoundedButton';
 
-export function ImageFooter({backgroundColor}) {
+export function ImageFooter({backgroundColor, meetLink}) {
   const windowWidth = useWindowDimensions().width;
   const HEIGHT = windowWidth * 0.17;
   const FOOTER_PADDING = windowWidth * 0.1;
@@ -33,7 +33,7 @@ export function ImageFooter({backgroundColor}) {
           name={'Join Meet'}
           style={{}}
           onpress={() => {
-            Linking.openURL('https://meet.google.com/vwp-msss-nxm');
+            Linking.openURL(meetLink);
           }}
         />
       </View>

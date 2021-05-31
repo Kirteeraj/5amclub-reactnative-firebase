@@ -10,6 +10,7 @@ import {
   Button,
 } from 'react-native';
 import {UserContext} from '../context/UserContext';
+import {CampContext} from '../context/CampContext';
 import {ImageFooter} from '../components/ImageFooter';
 import {PinMessage} from '../components/PinMessage';
 import Sound from 'react-native-sound';
@@ -54,6 +55,8 @@ export function MainScreen({navigation}) {
   const user = React.useContext(UserContext);
   const userData = user._user;
 
+  const {campData} = React.useContext(CampContext);
+
   return (
     <View style={{flex: 1}}>
       <StatusBar translucent backgroundColor="transparent" />
@@ -81,7 +84,7 @@ export function MainScreen({navigation}) {
             }}
           />
         </View>
-        <ImageFooter />
+        <ImageFooter meetLink={campData.meetLink} />
         <PinMessage />
         <PinMessage />
         <PinMessage />

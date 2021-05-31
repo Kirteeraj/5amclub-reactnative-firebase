@@ -12,8 +12,8 @@ import {UserContext} from './context/UserContext';
 import {SplashScreen} from './screens/SplashScreen';
 import {checkIfProfileExist} from './utils/checkIfProfileExist';
 import {OnboardingStackNavigator} from './navigators/OnboardingStackNavigator';
-import {StatusBar} from 'react-native';
 import {SubStackNavigator} from './navigators/SubStackNavigator';
+import {CampProvider} from './context/CampContext';
 
 const RootStack = createStackNavigator();
 
@@ -70,7 +70,9 @@ export default function App() {
               {() => (
                 <UserContext.Provider
                   value={{user, userProfile, setUserProfile}}>
-                  <MainStackNavigator />
+                  <CampProvider>
+                    <MainStackNavigator />
+                  </CampProvider>
                 </UserContext.Provider>
               )}
             </RootStack.Screen>

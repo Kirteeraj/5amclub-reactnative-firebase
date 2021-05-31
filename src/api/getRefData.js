@@ -1,13 +1,11 @@
 import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
 
-export function getProfile() {
-  return firestore()
-    .collection('users')
-    .doc(auth().currentUser.uid)
+export function getRefData(ref) {
+  // console.log('Ref', campRef);
+  return ref
     .get()
     .then((data) => {
-      // console.log('11', data.data());
+      // console.log('CampData', data.data());
       return data.data();
     })
     .catch((err) => {

@@ -14,8 +14,15 @@ import {checkIfProfileExist} from './utils/checkIfProfileExist';
 import {OnboardingStackNavigator} from './navigators/OnboardingStackNavigator';
 import {SubStackNavigator} from './navigators/SubStackNavigator';
 import {CampProvider} from './context/CampContext';
+import {requestUserPermission} from './api/messaging'; // for ios only
+import messaging from '@react-native-firebase/messaging';
+import useListenDataUpdate from './hooks/useListenDataUpdate';
 
 const RootStack = createStackNavigator();
+requestUserPermission();
+messaging()
+  .subscribeToTopic('weather')
+  .then(() => console.log('Subscribed to topic!'));
 
 export default function App() {
   // Set an initializing state whilst Firebase connects
@@ -23,6 +30,9 @@ export default function App() {
   const [user, setUser] = React.useState();
   const [userProfile, setUserProfile] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+
+  //listen to uiUpdate message
+  useListenDataUpdate();
 
   // Handle user state changes
   function onAuthStateChanged(user) {

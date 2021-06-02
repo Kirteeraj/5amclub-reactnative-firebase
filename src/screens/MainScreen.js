@@ -56,6 +56,8 @@ export function MainScreen({navigation}) {
   const userData = user._user;
 
   const {campData} = React.useContext(CampContext);
+  console.log(campData.timeline);
+  var timelineData = campData.timeline;
 
   return (
     <View style={{flex: 1}}>
@@ -63,8 +65,12 @@ export function MainScreen({navigation}) {
       <ScrollView contentContainerStyle={styles.container}>
         <Image source={{uri: data.link}} style={styles.image} />
         <View style={[styles.qoute, {top: windowHeight * 0.6 * data.factor}]}>
-          <Text style={{color: data.color}}>{data.qoute}</Text>
-          <Text style={{color: data.color}}>{data.author}</Text>
+          <Text allowFontScaling={false} style={{color: data.color}}>
+            {data.qoute}
+          </Text>
+          <Text allowFontScaling={false} style={{color: data.color}}>
+            {data.author}
+          </Text>
         </View>
         <View
           style={{position: 'absolute', top: windowHeight * 0.535, right: 15}}>
@@ -86,12 +92,18 @@ export function MainScreen({navigation}) {
         </View>
         <ImageFooter meetLink={campData.meetLink} />
         <View style={styles.timeline}>
-          <PinMessage />
-          <PinMessage />
-          <PinMessage />
-          <PinMessage />
-          <PinMessage />
-          <PinMessage />
+          {timelineData
+            .slice(0)
+            .reverse()
+            .map((data) => {
+              return (
+                <PinMessage
+                  date={data.date}
+                  title={data.title}
+                  message={data.message}
+                />
+              );
+            })}
         </View>
       </ScrollView>
     </View>
@@ -129,5 +141,6 @@ const styles = StyleSheet.create({
   },
   timeline: {
     marginTop: 20,
+    marginBottom: 20,
   },
 });

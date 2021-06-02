@@ -8,11 +8,11 @@ var messageBackgroundUri = Image.resolveAssetSource(messageBackground).uri;
 var facilatorImage =
   'https://firebasestorage.googleapis.com/v0/b/amclub-cd890.appspot.com/o/profilephotos%2F757sHgEM0gMBnawub0vLdeFepFk2?alt=media&token=ec823ac4-c763-40da-afc0-eb80e59cfdf0';
 
-export function PinMessage() {
+export function PinMessage({date, title, message}) {
   var data = {
-    date: 'May 20',
-    title: 'Gratitude',
-    message: 'The Energy of mind is essence of life, the word limit is up to',
+    date: date,
+    title: title,
+    message: message,
   };
 
   return (

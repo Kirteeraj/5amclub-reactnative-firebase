@@ -85,12 +85,14 @@ export function MainScreen({navigation}) {
           />
         </View>
         <ImageFooter meetLink={campData.meetLink} />
-        <PinMessage />
-        <PinMessage />
-        <PinMessage />
-        <PinMessage />
-        <PinMessage />
-        <PinMessage />
+        <View style={styles.timeline}>
+          <PinMessage />
+          <PinMessage />
+          <PinMessage />
+          <PinMessage />
+          <PinMessage />
+          <PinMessage />
+        </View>
       </ScrollView>
     </View>
   );
@@ -124,5 +126,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     color: 'white',
     marginHorizontal: 40,
+  },
+  timeline: {
+    marginTop: 20,
   },
 });

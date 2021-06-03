@@ -15,6 +15,7 @@ import {ImageFooter} from '../components/ImageFooter';
 import {PinMessage} from '../components/PinMessage';
 import Sound from 'react-native-sound';
 import music from '../assets/music.mp3';
+import useListenDataUpdate from '../hooks/useListenDataUpdate';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -55,8 +56,11 @@ export function MainScreen({navigation}) {
   const user = React.useContext(UserContext);
   const userData = user._user;
 
-  const {campData} = React.useContext(CampContext);
+  const {campData, refresh} = React.useContext(CampContext);
   console.log(campData.timeline);
+  //listen to update
+  useListenDataUpdate(refresh);
+
   var timelineData = campData.timeline;
 
   return (

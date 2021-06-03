@@ -31,9 +31,6 @@ export default function App() {
   const [userProfile, setUserProfile] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
-  //listen to uiUpdate message
-  useListenDataUpdate();
-
   // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);

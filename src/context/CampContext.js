@@ -24,9 +24,19 @@ const CampProvider = (props) => {
     fetchCampData();
   }, []);
 
+  //will be called when server pushes uiUpdate notification
+  async function refresh() {
+    console.log('refresh called');
+    var tempCampProfile = await getRefData(userProfile.activeCamp);
+    var tempCampData = await getRefData(tempCampProfile.camp);
+    console.log('temp', tempCampData);
+    setCampProfile(tempCampProfile);
+    setCampData(tempCampData);
+  }
+
   return (
     <CampContext.Provider
-      value={{campData, campProfile, setCampData, setCampProfile}}>
+      value={{campData, campProfile, setCampData, setCampProfile, refresh}}>
       {props.children}
     </CampContext.Provider>
   );

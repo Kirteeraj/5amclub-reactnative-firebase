@@ -94,14 +94,15 @@ export function MainScreen({navigation}) {
             }}
           />
         </View>
-        <ImageFooter meetLink={campData.meetLink} />
+        <ImageFooter meetLink={campData.meetLink} campName={campData.name} />
         <View style={styles.timeline}>
           {timelineData
             .slice(0)
             .reverse()
-            .map((data) => {
+            .map((data, index) => {
               return (
                 <PinMessage
+                  key={index}
                   date={data.date}
                   title={data.title}
                   message={data.message}

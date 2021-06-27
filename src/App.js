@@ -71,6 +71,7 @@ export default function App() {
     }
     if (user) {
       if (userProfile) {
+        console.log('UserProfile Exsist');
         return (
           <>
             <RootStack.Screen name={'MainStack'}>
@@ -94,6 +95,7 @@ export default function App() {
           </>
         );
       } else {
+        console.log('UserProfile Does not exsist');
         return (
           <>
             <RootStack.Screen name={'OnboardingStack'}>
@@ -110,7 +112,6 @@ export default function App() {
         );
       }
     } else {
-      console.log('Inside this');
       return (
         <RootStack.Screen name={'AuthStack'}>
           {() => <AuthStackNavigator />}

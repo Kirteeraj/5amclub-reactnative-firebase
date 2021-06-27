@@ -11,3 +11,5 @@ export async function registerToCamp({data, order_id, options}) {
     options,
   });
 }
+
+//Check if register to camp also adds active camp in user profile

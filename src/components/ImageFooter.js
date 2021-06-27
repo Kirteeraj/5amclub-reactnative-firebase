@@ -9,7 +9,7 @@ import {
 import {OutlineButton} from './OutlineButton';
 import {RoundedButton} from './RoundedButton';
 
-export function ImageFooter({backgroundColor, meetLink}) {
+export function ImageFooter({backgroundColor, meetLink, campName = ''}) {
   const windowWidth = useWindowDimensions().width;
   const HEIGHT = windowWidth * 0.17;
   const FOOTER_PADDING = windowWidth * 0.1;
@@ -24,8 +24,12 @@ export function ImageFooter({backgroundColor, meetLink}) {
         </Text>
         <Text
           allowFontScaling={false}
-          style={{fontSize: 26, fontWeight: '400'}}>
-          4:53 AM
+          style={{
+            fontSize: 23,
+            fontWeight: '700',
+            fontFamily: 'sans-serif-thin',
+          }}>
+          {campName}
         </Text>
       </View>
       <View style={{height: 67, flexDirection: 'column-reverse'}}>

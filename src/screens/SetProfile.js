@@ -22,8 +22,6 @@ import {UserContext} from '../context/UserContext';
 const avatarImageUri = Image.resolveAssetSource(avatarImage).uri;
 
 export function SetProfile({navigation}) {
-  const {userProfile} = React.useContext(UserContext);
-
   //form states
   const [filePath, setFilePath] = React.useState({uri: avatarImageUri});
   const [name, setName] = React.useState(null);
@@ -33,11 +31,6 @@ export function SetProfile({navigation}) {
   const [wakeUpNumber, setWakeUpNumber] = React.useState(null);
   const [scribble, setScribble] = React.useState(null);
   const [contribution, setContribution] = React.useState(null);
-
-  //if user is passes that means we are in edit mode
-  if (userProfile) {
-    console.log(userProfile);
-  }
 
   //loaging and error handling
   const [loading, setLoading] = React.useState(false);

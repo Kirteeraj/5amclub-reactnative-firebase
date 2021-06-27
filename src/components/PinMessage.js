@@ -39,8 +39,12 @@ export function PinMessage({date, title, message}) {
           style={styles.avatar}
         /> */}
             <View style={{marginTop: 10, marginLeft: 5, width: '85%'}}>
-              <Text style={styles.title}>{data.title}</Text>
-              <Text style={styles.message}>{data.message}</Text>
+              <Text allowFontScaling={false} style={styles.title}>
+                {data.title}
+              </Text>
+              <Text allowFontScaling={false} style={styles.message}>
+                {data.message}
+              </Text>
             </View>
           </View>
           <Text style={styles.date} allowFontScaling={false}>
@@ -75,6 +79,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#EA81A7',
     fontWeight: 'bold',
+    fontSize: 15.5,
   },
   message: {
     flex: 1,
@@ -86,6 +91,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     height: 45,
     fontFamily: 'sans-serif-light',
+    fontSize: 15,
   },
   avatar: {
     margin: 5,

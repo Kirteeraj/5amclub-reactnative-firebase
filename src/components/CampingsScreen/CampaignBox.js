@@ -5,8 +5,13 @@ import {OutlineButton} from '../OutlineButton';
 import {razorpayPay} from '../../api/index';
 import {Loading} from '../../components/Loading';
 import useExpandable from '../../hooks/useExpandable';
+import {UserContext} from '../../context/UserContext';
+import {CampContext} from '../../context/CampContext';
 
 export function CampaignBox({campData}) {
+  //importing rootRefresh()
+  const {refresh} = React.useContext(CampContext);
+
   var data = {
     id: campData.id.id,
     name: campData.name,
@@ -82,7 +87,13 @@ export function CampaignBox({campData}) {
             onpress={async () => {
               try {
                 setLoading(true);
-                await razorpayPay(data);
+                await razorpayPay(
+                  data,
+                  async () => {
+                    await refresh();
+                  },
+                  setLoading,
+                ); //passing function to refresh after sccess
               } catch (err) {
                 alert(`We are having some trouble: ${err}`);
               } finally {

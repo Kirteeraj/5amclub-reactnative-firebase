@@ -10,7 +10,6 @@ import {
   Button,
 } from 'react-native';
 import {UserContext} from '../context/UserContext';
-import {CampContext} from '../context/CampContext';
 import {ImageFooter} from '../components/ImageFooter';
 import {PinMessage} from '../components/PinMessage';
 import Sound from 'react-native-sound';
@@ -26,7 +25,7 @@ const backgroundSound = new Sound(music, Sound.MAIN_BUNDLE, (error) => {
   }
 });
 
-export function MainScreen({navigation}) {
+export function NoACtiveCampMainScreen({navigation}) {
   const [isMute, setIsMute] = React.useState(false);
 
   React.useEffect(() => {
@@ -56,12 +55,12 @@ export function MainScreen({navigation}) {
   const user = React.useContext(UserContext);
   const userData = user._user;
 
-  const {campData, refresh} = React.useContext(CampContext);
-  // console.log(campData.timeline);
-  //listen to update
-  useListenDataUpdate(refresh);
+  //   const {campData, refresh} = React.useContext(CampContext);
+  //   // console.log(campData.timeline);
+  //   //listen to update
+  //   useListenDataUpdate(refresh);
 
-  var timelineData = campData.timeline;
+  //   var timelineData = campData.timeline;
 
   return (
     <View style={{flex: 1}}>
@@ -94,8 +93,11 @@ export function MainScreen({navigation}) {
             }}
           />
         </View>
-        <ImageFooter meetLink={campData.meetLink} campName={campData.name} />
-        <View style={styles.timeline}>
+        <ImageFooter
+          meetLink={'https://www.kirteeraj.rocks'}
+          campName={'Welcome'}
+        />
+        {/* <View style={styles.timeline}>
           {timelineData
             .slice(0)
             .reverse()
@@ -109,7 +111,7 @@ export function MainScreen({navigation}) {
                 />
               );
             })}
-        </View>
+        </View> */}
       </ScrollView>
     </View>
   );

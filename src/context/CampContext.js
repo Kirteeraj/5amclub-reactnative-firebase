@@ -1,12 +1,13 @@
 import React from 'react';
 import {createContext} from 'react';
+import {getProfile} from '../api';
 import {getRefData} from '../api/getRefData';
 import {UserContext} from './UserContext';
 
 var CampContext = createContext();
 
 const CampProvider = (props) => {
-  const {userProfile} = React.useContext(UserContext);
+  const {userProfile, setUserProfile} = React.useContext(UserContext);
   // console.log('User Profile in Campcontex:', userProfile);
 
   //CampContext Provides campProfile and campData states
@@ -24,10 +25,13 @@ const CampProvider = (props) => {
     fetchCampData();
   }, []);
 
-  //will be called when server pushes uiUpdate notification
   async function refresh() {
+    // Note : refreshing camp will also refresh UserProfile
+    const userProfile1 = await getProfile();
+    setUserProfile(userProfile1);
     console.log('refresh called');
-    var tempCampProfile = await getRefData(userProfile.activeCamp);
+
+    var tempCampProfile = await getRefData(userProfile1.activeCamp);
     var tempCampData = await getRefData(tempCampProfile.camp);
     console.log('temp', tempCampData);
     setCampProfile(tempCampProfile);

@@ -13,10 +13,12 @@ import {SplashScreen} from './screens/SplashScreen';
 import {checkIfProfileExist} from './utils/checkIfProfileExist';
 import {OnboardingStackNavigator} from './navigators/OnboardingStackNavigator';
 import {SubStackNavigator} from './navigators/SubStackNavigator';
-import {CampProvider} from './context/CampContext';
+import {CampContext, CampProvider} from './context/CampContext';
+
 import {requestUserPermission} from './api/messaging'; // for ios only
 import messaging from '@react-native-firebase/messaging';
 import useListenDataUpdate from './hooks/useListenDataUpdate';
+import {NoActiveCampNavigator} from './navigators/NoActiveCampNavigator';
 
 const RootStack = createStackNavigator();
 requestUserPermission(); // Needed for IOS
@@ -63,6 +65,7 @@ export default function App() {
   }, [checkIfProfileExist]);
 
   function renderScreens() {
+    // console.log('Rerender Called');
     if (initializing) {
       return <RootStack.Screen name={'Splash'} component={SplashScreen} />;
     }
@@ -72,28 +75,63 @@ export default function App() {
     if (user) {
       if (userProfile) {
         console.log('UserProfile Exsist');
-        return (
-          <>
-            <RootStack.Screen name={'MainStack'}>
-              {() => (
-                <UserContext.Provider
-                  value={{user, userProfile, setUserProfile}}>
-                  <CampProvider>
-                    <MainStackNavigator />
-                  </CampProvider>
-                </UserContext.Provider>
-              )}
-            </RootStack.Screen>
-            <RootStack.Screen name={'SubStack'}>
-              {() => (
-                <UserContext.Provider
-                  value={{user, userProfile, setUserProfile}}>
-                  <SubStackNavigator />
-                </UserContext.Provider>
-              )}
-            </RootStack.Screen>
-          </>
-        );
+        // Check if ActiveCampi exisit
+        if (userProfile.activeCamp) {
+          return (
+            <>
+              <RootStack.Screen name={'MainStack'}>
+                {() => (
+                  <UserContext.Provider
+                    value={{
+                      user,
+                      userProfile,
+                      setUserProfile,
+                    }}>
+                    <CampProvider>
+                      <MainStackNavigator />
+                    </CampProvider>
+                  </UserContext.Provider>
+                )}
+              </RootStack.Screen>
+              <RootStack.Screen name={'SubStack'}>
+                {() => (
+                  <UserContext.Provider
+                    value={{user, userProfile, setUserProfile}}>
+                    <SubStackNavigator />
+                  </UserContext.Provider>
+                )}
+              </RootStack.Screen>
+            </>
+          );
+        } else {
+          //User with NoACtive Camp
+          return (
+            <>
+              <RootStack.Screen name={'MainStack'}>
+                {() => (
+                  <UserContext.Provider
+                    value={{
+                      user,
+                      userProfile,
+                      setUserProfile,
+                    }}>
+                    <CampProvider>
+                      <NoActiveCampNavigator />
+                    </CampProvider>
+                  </UserContext.Provider>
+                )}
+              </RootStack.Screen>
+              <RootStack.Screen name={'SubStack'}>
+                {() => (
+                  <UserContext.Provider
+                    value={{user, userProfile, setUserProfile}}>
+                    <SubStackNavigator />
+                  </UserContext.Provider>
+                )}
+              </RootStack.Screen>
+            </>
+          );
+        }
       } else {
         console.log('UserProfile Does not exsist');
         return (

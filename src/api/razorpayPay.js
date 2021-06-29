@@ -3,7 +3,7 @@ import RazorpayCheckout from 'react-native-razorpay';
 import auth from '@react-native-firebase/auth';
 import {getProfile, createOrder, registerToCamp} from '../api/index';
 
-export async function razorpayPay(data) {
+export async function razorpayPay(data, reload, setLoading) {
   var userProfile = await getProfile();
   var user = auth().currentUser;
   var order = await createOrder({campaignId: data.id, uid: user.uid});
@@ -26,6 +26,7 @@ export async function razorpayPay(data) {
   };
   // console.log(options);
   // await sleep(3000);
+  setLoading(true);
   RazorpayCheckout.open(options)
     .then(async (data1) => {
       // handle success
@@ -38,9 +39,11 @@ export async function razorpayPay(data) {
       });
       // console.log('result', result);
       alert(`Success: ${data1.razorpay_order_id}`);
+      await reload();
     })
     .catch((error) => {
       // handle failure
       alert(`Error: ${error.code} | ${error.description}`);
+      setLoading(false);
     });
 }

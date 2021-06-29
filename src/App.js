@@ -19,10 +19,10 @@ import messaging from '@react-native-firebase/messaging';
 import useListenDataUpdate from './hooks/useListenDataUpdate';
 
 const RootStack = createStackNavigator();
-requestUserPermission();
+requestUserPermission(); // Needed for IOS
 messaging()
-  .subscribeToTopic('weather')
-  .then(() => console.log('Subscribed to topic!'));
+  .subscribeToTopic('weather') // Weather is global messaging topic
+  .then(() => console.log('Subscribed to topic global'));
 
 export default function App() {
   // Set an initializing state whilst Firebase connects

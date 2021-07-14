@@ -15,6 +15,8 @@ import {PinMessage} from '../components/PinMessage';
 import Sound from 'react-native-sound';
 import music from '../assets/music.mp3';
 import useListenDataUpdate from '../hooks/useListenDataUpdate';
+import {lightTheme} from '../themes/light';
+import PosterBox from '../components/PosterBox';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -53,14 +55,6 @@ export function NoACtiveCampMainScreen({navigation}) {
   };
 
   const user = React.useContext(UserContext);
-  const userData = user._user;
-
-  //   const {campData, refresh} = React.useContext(CampContext);
-  //   // console.log(campData.timeline);
-  //   //listen to update
-  //   useListenDataUpdate(refresh);
-
-  //   var timelineData = campData.timeline;
 
   return (
     <View style={{flex: 1}}>
@@ -93,25 +87,12 @@ export function NoACtiveCampMainScreen({navigation}) {
             }}
           />
         </View>
-        <ImageFooter
+        {/* <ImageFooter
           meetLink={'https://www.kirteeraj.rocks'}
           campName={'Welcome'}
-        />
-        {/* <View style={styles.timeline}>
-          {timelineData
-            .slice(0)
-            .reverse()
-            .map((data, index) => {
-              return (
-                <PinMessage
-                  key={index}
-                  date={data.date}
-                  title={data.title}
-                  message={data.message}
-                />
-              );
-            })}
-        </View> */}
+        /> */}
+
+        <PosterBox navigation={navigation}/>
       </ScrollView>
     </View>
   );
